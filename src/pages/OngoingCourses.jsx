@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { CourseCard } from '../components/CourseCard';
+import { useTheme } from '../components/ThemeContext';
 
 export function OngoingCourses({ user }) {
     const [ongoingCourses, setOngoingCourses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const {theme} = useTheme()
 
     useEffect(() => {
         const fetchOngoingCourses = async () => {
@@ -33,10 +35,10 @@ export function OngoingCourses({ user }) {
     if (error) return <p>{error}</p>;
 
     return (
-        <div className="grid grid-cols-4 gap-4">
+        <div className={`app-container ${theme} flex flex-wrap gap-4 dark:bg-gray-800`}>
             {ongoingCourses.length > 0 ? (
                 ongoingCourses.map(course => (
-                    <CourseCard key={course._id} course={course} user={user} />
+                    <CourseCard key={course._id} course={course} user={user} isEnrolled={true}/>
                 ))
             ) : (
                 <p>No ongoing courses found.</p>

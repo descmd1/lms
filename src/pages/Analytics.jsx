@@ -3,6 +3,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import * as jwt_decode from 'jwt-decode';
+import { useTheme } from '../components/ThemeContext';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -14,6 +15,7 @@ export const Analytics = () => {
     ongoing: 0,
     completed: 0,
   });
+const {theme} = useTheme()
 
   useEffect(() => {
     const fetchAnalytics = async () => {
@@ -71,7 +73,8 @@ export const Analytics = () => {
 
   return (
      
-      <div className='flex flex-col w-full justify-center shadow-md rounded-md bg-white p-4'>
+      <div className={`app-container ${theme} flex flex-col w-full justify-center 
+      shadow-md rounded-md bg-white p-4 dark:bg-gray-800 min-h-screen`}>
         <Line data={data} options={options} />
       </div>
   );

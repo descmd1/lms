@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useTheme } from '../components/ThemeContext';
+
 export const ViewResource = () => {
   const [resources, setResources] = useState([]);
   const [selectedResource, setSelectedResource] = useState(null);
+   const {theme} = useTheme()
 
   // Fetch all resources on component load
   useEffect(() => {
@@ -33,19 +36,20 @@ export const ViewResource = () => {
   };
 
   return (
-    <div>
-      <h2>Uploaded Resources</h2>
-      <ul>
+    <div className={`app-container ${theme} flex flex-col w-full items-start
+    shadow-md bg-white p-4 rounded-md gap-4 min-h-screen dark:bg-gray-800`}>
+      <h2 className='text-bold'>View Uploaded Resources</h2>
+      <ul className='flex flex-col items-start justify-center shadow-md gap-4'>
         {/* Render list of resource links */}
         {resources.map(resource => (
-          <li key={resource._id}>
+          <li key={resource._id} className='text-blue-500 underline'>
             <a href="#" onClick={() => viewResourceDetails(resource._id)}>
               {resource.title}
             </a>
           </li>
         ))}
       </ul>
-
+ 
       {/* Render the selected resource's PDF */}
       {selectedResource && (
         <div>

@@ -17,3 +17,22 @@ code {
     monospace;
 }
 
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.scrollbar-hidden {
+  scrollbar-width: none;
+}
+
+/* global.css */
+.app-container.light {
+  background-color: #f4f4f4;
+  color: #000000;
+}
+
+.app-container.dark {
+  background-color: #000000;
+  color: #f7fafc;
+}

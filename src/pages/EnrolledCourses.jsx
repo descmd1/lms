@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { CourseCard } from '../components/CourseCard'; 
 import * as jwt_decode from "jwt-decode";
+import { useTheme } from '../components/ThemeContext';
 
 export function EnrolledCourses() {
     const [enrolledCourses, setEnrolledCourses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const {theme} = useTheme()
 
     const fetchEnrolledCourses = async () => {
         const token = sessionStorage.getItem("user");
@@ -45,10 +47,10 @@ export function EnrolledCourses() {
     );
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className={`app-container ${theme} flex flex-wrap gap-4 dark:bg-gray-800`}>
             {enrolledCourses.length > 0 ? (
                 enrolledCourses.map(course => (
-                    <CourseCard key={course._id} course={course} />
+                    <CourseCard key={course.id} course={course} isEnrolled={true} />
                 ))
             ) : (
                 <p>No enrolled courses found.</p>

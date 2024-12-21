@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createCourse } from "../api"; // Adjust the import path as necessary
 import { useNavigate } from "react-router-dom";
 import { BiUpload } from "react-icons/bi";
+import { useTheme } from "../components/ThemeContext";
 
 export function CreateCourse() {
     const [title, setTitle] = useState("");
@@ -13,6 +14,7 @@ export function CreateCourse() {
     const [category, setCategory] = useState("programming"); // Default category
     const [chapters, setChapters] = useState([{ title: "", content: "", video: null }]); // Include video in chapter objects
     const navigate = useNavigate();
+    const {theme} = useTheme()
 
     const handleImageChange = (e) => {
         setImage(e.target.files[0]); // Store the selected image file
@@ -79,7 +81,7 @@ chapters.forEach((chapter, index) => {
     }
 
     return (
-        <div className="flex justify-center px-4 border shadow-md rounded-md bg-[#fdfdfd] py-4">
+        <div className={`app-container ${theme} flex justify-center px-4 border shadow-md rounded-md bg-[#fdfdfd] py-4`}>
             <form onSubmit={handleSubmit} className="flex flex-col w-full">
                 <input
                     name="title"
@@ -87,7 +89,7 @@ chapters.forEach((chapter, index) => {
                     maxLength={100}
                     onChange={(e) => setTitle(e.target.value)}
                     required
-                    className="py-2 px-3 mb-4 rounded-sm border"
+                    className={`app-container ${theme} py-2 px-3 mb-4 rounded-sm border color dark:bg-gray-900`}
                 />
                 <input
                     name="description"
@@ -95,7 +97,7 @@ chapters.forEach((chapter, index) => {
                     maxLength={300}
                     onChange={(e) => setDescription(e.target.value)}
                     required
-                    className="py-3 px-3 mb-4 rounded-sm border"
+                    className={`app-container ${theme} py-3 px-3 mb-4 rounded-sm border color dark:bg-gray-900`}
                 />
                 <textarea
                     name="content"
@@ -103,7 +105,7 @@ chapters.forEach((chapter, index) => {
                     maxLength={3000}
                     onChange={(e) => setContent(e.target.value)}
                     required
-                    className="py-5 px-4 mb-4 rounded-sm border"
+                    className={`app-container ${theme} py-5 px-4 mb-4 rounded-sm border color dark:bg-gray-900`}
                 />
                 
                 {/* Category selection */}
@@ -114,7 +116,7 @@ chapters.forEach((chapter, index) => {
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                         required
-                        className="py-2 px-3 mb-4 rounded-sm border w-full"
+                        className={`app-container ${theme} py-2 px-3 mb-4 rounded-sm border color dark:bg-gray-900 w-full`}
                     >
                         <option value="programming">Programming</option>
                         <option value="design">Design</option>
@@ -133,14 +135,14 @@ chapters.forEach((chapter, index) => {
                                 placeholder={`Chapter ${index + 1} Title`}
                                 value={chapter.title}
                                 onChange={(e) => handleChapterChange(index, 'title', e.target.value)}
-                                className="py-2 px-3 rounded-sm border"
+                                className={`app-container ${theme} py-2 px-3 mb-4 rounded-sm border color dark:bg-gray-900`}
                             />
                             <textarea
                                 name={`chapter-content-${index}`}
                                 placeholder={`Chapter ${index + 1} Content`}
                                 value={chapter.content}
                                 onChange={(e) => handleChapterChange(index, 'content', e.target.value)}
-                                className="py-2 px-3 rounded-sm border"
+                                className={`app-container ${theme} py-2 px-3 mb-4 rounded-sm border color dark:bg-gray-900`}
                             />
                              <div className="py-2 px-2 mb-2 rounded-sm border">
                              <button className="flex items-center justify-center text-blue-500"><BiUpload/> </button>
@@ -195,7 +197,7 @@ chapters.forEach((chapter, index) => {
                         maxLength={300}
                         onChange={(e) => setPrice(e.target.value)}
                         required
-                        className="py-2 px-3 mb-4 rounded-sm border w-full"
+                        className={`app-container ${theme} py-2 px-3 mb-4 rounded-sm border color dark:bg-gray-900 w-full`}
                     />
                     <input
                         name="duration"
@@ -203,7 +205,7 @@ chapters.forEach((chapter, index) => {
                         maxLength={300}
                         onChange={(e) => setDuration(e.target.value)}
                         required
-                        className="py-2 px-3 mb-4 rounded-sm border w-full"
+                        className={`app-container ${theme} py-2 px-3 mb-4 rounded-sm border color dark:bg-gray-900 w-full`}
                     />
                 </div>
 

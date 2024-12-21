@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router-dom"
 import { sidebarData, managecourseData, dashboardData } from "./pageData"
+import { useTheme } from "./ThemeContext";
 
 export function Sidebar() {
     const [isOpen, setIsOpen] = useState(false);
+    const { theme } = useTheme()
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
     return (
-        <div className="flex flex-col items-center justify-start bg-white p-3 gap-4 
-        rounded-md md:visible invisible md:w-[220px] min-h-screen ">
+        <div className={` app-container ${theme} flex flex-col items-center justify-start bg-white p-3 gap-4 
+        shadow-md rounded-md md:visible invisible md:w-[220px] min-h-screen dark:bg-black dark:shadow-2xl`}>
 {dashboardData.map((page, index) => {
       return (
         <Link

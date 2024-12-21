@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { updateCourse, getCourse } from "../api";
+import { useTheme } from "../components/ThemeContext";
 
 export function EditCourse() {
     const { id } = useParams(); // Get course ID from URL params
     const navigate = useNavigate();
+    const {theme} = useTheme()
 
     // State to store course data
     const [courseData, setCourseData] = useState({
@@ -101,7 +103,8 @@ export function EditCourse() {
     }
 
     return (
-        <div className="flex justify-center items-center px-4 py-4 rounded-md border shadow-2xl bg-[#fdfdfd]">
+        <div className={`app-container ${theme} flex justify-center items-center px-4 py-4 
+        rounded-md border shadow-2xl bg-[#fdfdfd] dark:bg-gray-800`}>
             <form onSubmit={handleSubmit} className="flex flex-col w-full shadow-sm">
                 <input
                     name="title"
@@ -110,7 +113,7 @@ export function EditCourse() {
                     value={courseData.title}  // Set input value from fetched data
                     onChange={handleInputChange}
                     required
-                    className="py-2 px-3 mb-4 rounded-sm border"
+                    className={`app-container ${theme} py-2 px-3 mb-4 rounded-sm border color dark:bg-gray-900`}
                 />
                 <input
                     name="description"
@@ -119,7 +122,7 @@ export function EditCourse() {
                     value={courseData.description}  // Set input value from fetched data
                     onChange={handleInputChange}
                     required
-                    className="py-3 px-3 mb-4 rounded-sm border"
+                    className={`app-container ${theme} py-3 px-3 mb-4 rounded-sm border color dark:bg-gray-900`}
                 />
                 <textarea
                     name="content"
@@ -128,7 +131,7 @@ export function EditCourse() {
                     value={courseData.content}  // Set textarea value from fetched data
                     onChange={handleInputChange}
                     required
-                    className="py-5 px-4 mb-4 rounded-sm border"
+                    className={`app-container ${theme} py-5 px-4 mb-4 rounded-sm border color dark:bg-gray-900`}
                 />
                 {/* Category selection */}
                 <div className="flex flex-col gap-2 w-full">
@@ -138,7 +141,7 @@ export function EditCourse() {
                         value={courseData.category}  // Set selected category from fetched data
                         onChange={handleInputChange}
                         required
-                        className="py-2 px-3 mb-4 rounded-sm border w-full"
+                        className={`app-container ${theme} py-2 px-3 mb-4 rounded-sm border color dark:bg-gray-900`}
                     >
                         <option value="">Select a category</option>
                         <option value="programming">Programming</option>
@@ -159,14 +162,14 @@ export function EditCourse() {
                                 value={chapter.title}  // Set chapter title from fetched data
                                 onChange={(e) => handleChapterChange(index, e)}
                                 required
-                                className="py-2 px-3 mb-2 rounded-sm border w-full"
+                                className={`app-container ${theme} py-2 px-3 mb-4 rounded-sm border color dark:bg-gray-900 w-full`}
                             />
                             <input
                                 type="file"
                                 name="video"
                                 accept="video/*"
                                 onChange={(e) => handleChapterFileChange(index, e)}  // Handle file input for chapter video
-                                className="py-2 px-3 mb-2 rounded-sm border w-full"
+                                className={`app-container ${theme} py-2 px-3 mb-4 rounded-sm border color dark:bg-gray-900 w-full`}
                             />
                         </div>
                     ))}
@@ -179,7 +182,7 @@ export function EditCourse() {
                         value={courseData.price}  // Set input value from fetched data
                         onChange={handleInputChange}
                         required
-                        className="py-2 px-3 mb-4 rounded-sm border w-full"
+                        className={`app-container ${theme} py-2 px-3 mb-4 rounded-sm border color dark:bg-gray-900`}
                     />
                     <input
                         name="duration"
@@ -187,7 +190,7 @@ export function EditCourse() {
                         value={courseData.duration}  // Set input value from fetched data
                         onChange={handleInputChange}
                         required
-                        className="py-2 px-3 mb-4 rounded-sm border w-full"
+                        className={`app-container ${theme} py-2 px-3 mb-4 rounded-sm border color dark:bg-gray-900`}
                     />
                 </div>
                 <div className="flex items-center mb-4">
