@@ -3,7 +3,7 @@ import { createCourse } from "../api";
 import { useNavigate } from "react-router-dom";
 import { BiUpload } from "react-icons/bi";
 import { useTheme } from "../components/ThemeContext";
-import swal from "sweetalert2";
+import Swal from "sweetalert2";
 
 export function CreateCourse() {
     const [title, setTitle] = useState("");
@@ -76,7 +76,7 @@ export function CreateCourse() {
         const response = await createCourse(formData);
 
         if (response.status === 200) {
-            swal.fire({
+            Swal.fire({
                 title: "Good job!",
                 text: "Course created successfully!",
                 icon: "success",
@@ -84,7 +84,12 @@ export function CreateCourse() {
             });
             navigate("/home");
         } else {
-            console.error("Course creation failed:", response);
+            Swal.fire({
+                title: "Failed!",
+                text: "Course creation failed!",
+                icon: "error",
+                confirmButtonText: "OK",
+            });
         }
     }
 

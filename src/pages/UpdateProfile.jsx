@@ -5,6 +5,7 @@ import * as jwt_decode from "jwt-decode";
 import { getCourses } from "../api";
 import { FaUser } from "react-icons/fa6";
 import { useTheme } from "../components/ThemeContext";
+import Swal from "sweetalert2";
 
 export const UpdateProfile = () => {
   const [courses, setCourses] = useState([]);
@@ -86,9 +87,19 @@ const {theme} = useTheme();
           },
         });
         if (response.status === 200) {
-          console.log("Profile updated successfully:", response.data);
+          Swal.fire({
+                          title: "Success",
+                          text: "User account updated successfully.",
+                          icon: "success",
+                          confirmButtonText: "OK",
+                      });
         } else {
-          window.alert("User account could not be updated!");
+          Swal.fire({
+                          title: "Failed!",
+                          text: "User account could not be updated!.",
+                          icon: "error",
+                          confirmButtonText: "OK",
+                      });
         }
       } catch (error) {
         console.error("Error updating profile:", error);
