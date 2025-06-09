@@ -3,6 +3,8 @@ import axios from 'axios';
 import { CourseCard } from '../components/CourseCard';
 import { useTheme } from '../components/ThemeContext';
 
+const base_url = process.env.REACT_APP_BASE_URL;
+
 export function OngoingCourses({ user }) {
     const [ongoingCourses, setOngoingCourses] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -14,7 +16,7 @@ export function OngoingCourses({ user }) {
             const token = sessionStorage.getItem("user");
 
             try {
-                const response = await axios.get(`http://localhost:5001/ongoingcourses`, {
+                const response = await axios.get(`${base_url}/ongoingcourses`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

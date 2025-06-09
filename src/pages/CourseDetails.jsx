@@ -7,6 +7,7 @@ import * as jwt_decode from "jwt-decode";
 import { AllComments } from "../components/AllComments";
 import { useTheme } from "../components/ThemeContext";
 
+
 export function CourseDetails() {
   const [course, setCourse] = useState({});
   const [role, setRole] = useState(""); 

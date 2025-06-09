@@ -7,6 +7,8 @@ import { FaUser } from "react-icons/fa6";
 import { useTheme } from "../components/ThemeContext";
 import Swal from "sweetalert2";
 
+const base_url = process.env.REACT_APP_BASE_URL;
+
 export const UpdateProfile = () => {
   const [courses, setCourses] = useState([]);
   const [user, setUser] = useState({});
@@ -24,7 +26,7 @@ const {theme} = useTheme();
       if (token) {
         const decodedUser = jwt_decode.jwtDecode(token);
         try {
-          const response = await axios.get(`http://localhost:5001/user/${decodedUser._id}`);
+          const response = await axios.get(`${base_url}/user/${decodedUser._id}`);
           const userData = response.data;
           const allCourses = await getCourses();
           const filteredCourses = allCourses.filter(
@@ -79,7 +81,7 @@ const {theme} = useTheme();
       const decodedUser = jwt_decode.jwtDecode(token);
       try {
         const response = await axios.put(
-          `http://localhost:5001/user/${decodedUser._id}`,
+          `${base_url}/user/${decodedUser._id}`,
           formData,
           {
             headers: {

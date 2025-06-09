@@ -3,6 +3,8 @@ import axios from "axios";
 import { ReplyForm } from "./ReplyForm";
 import * as jwt_decode from "jwt-decode";
 
+const base_url = process.env.REACT_APP_BASE_URL;
+
 export function AllComments({ courseId }) {
   const [comments, setComments] = useState([]);
 
@@ -14,7 +16,7 @@ export function AllComments({ courseId }) {
         const userId = decodedUser?._id || decodedUser?.userId;  
         console.log('Decoded User ID:', userId);
       try {
-        const response = await axios.get(`http://localhost:5001/comment/${courseId}`);
+        const response = await axios.get(`${base_url}/comment/${courseId}`);
         setComments(response.data.comments);
       } catch (error) {
         console.error("Error fetching comments:", error);

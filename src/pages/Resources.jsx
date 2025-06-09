@@ -4,6 +4,8 @@ import * as jwt_decode from "jwt-decode";
 import { useTheme } from '../components/ThemeContext';
 import swal from 'sweetalert2';
 
+const base_url = process.env.REACT_APP_BASE_URL;
+
 export const Resources = () => {
   const [title, setTitle] = useState('');
   const [file, setFile] = useState(null);
@@ -23,7 +25,7 @@ export const Resources = () => {
     formData.append('tutorId', decodedUser._id); 
 
     try {
-      const response = await axios.post('http://localhost:5001/resources', formData, {
+      const response = await axios.post(`${base_url}/resources`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       if (response.status === 200){

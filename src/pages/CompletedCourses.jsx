@@ -4,6 +4,8 @@ import Confetti from 'react-confetti';
 import { CourseCard } from '../components/CourseCard';
 import { useTheme } from '../components/ThemeContext';
 
+const base_url = process.env.REACT_APP_BASE_URL;
+
 export function CompletedCourses({ user }) {
     const [completedCourses, setCompletedCourses] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -16,7 +18,7 @@ export function CompletedCourses({ user }) {
             const token = sessionStorage.getItem("user");
 
             try {
-                const response = await axios.get(`http://localhost:5001/completedcourses`, {
+                const response = await axios.get(`${base_url}/completedcourses`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

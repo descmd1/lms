@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 
+const base_url = process.env.REACT_APP_BASE_URL;
+
 export function ReplyForm({ commentId, onReplyAdded }) {
   const [text, setText] = useState("");
 
@@ -8,7 +10,7 @@ export function ReplyForm({ commentId, onReplyAdded }) {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `http://localhost:5001/comment/reply/${commentId}`,
+        `${base_url}/comment/reply/${commentId}`,
         { text },
         { headers: { Authorization: "Bearer YOUR_TOKEN" } }
       );

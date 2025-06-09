@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useTheme } from '../components/ThemeContext';
 
+const base_url = process.env.REACT_APP_BASE_URL;
+
 export const ViewResource = () => {
   const [resources, setResources] = useState([]);
   const [selectedResource, setSelectedResource] = useState(null);
@@ -11,7 +13,7 @@ export const ViewResource = () => {
   useEffect(() => {
     const fetchResources = async () => {
       try {
-        const res = await axios.get('http://localhost:5001/resources');
+        const res = await axios.get(`${base_url}/resources`);
         setResources(res.data);
       } catch (error) {
         console.error('Error fetching resources', error);
@@ -23,7 +25,7 @@ export const ViewResource = () => {
   // Fetch details of a single resource when clicked
   const viewResourceDetails = async (id) => {
     try {
-      const res = await axios.get(`http://localhost:5001/resources/${id}`);
+      const res = await axios.get(`${base_url}/resources/${id}`);
       setSelectedResource(res.data); 
 
       // Create a base64 data URL for opening in new tab

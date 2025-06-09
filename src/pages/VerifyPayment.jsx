@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { useTheme } from '../components/ThemeContext';
 
+const base_url = process.env.REACT_APP_BASE_URL;
+
 export function VerifyPayment() {
     const { courseId } = useParams(); 
     const navigate = useNavigate();
@@ -21,7 +23,7 @@ export function VerifyPayment() {
 
             try {
                 // Call your backend to verify the payment
-                const response = await axios.get(`http://localhost:5001/verifypayment/${reference}`);
+                const response = await axios.get(`${base_url}/verifypayment/${reference}`);
                 console.log('Payment verification response:', response.data);
 
                 if (response.data.message === 'Payment verified and user enrolled') {

@@ -4,6 +4,8 @@ import { CourseCard } from '../components/CourseCard';
 import * as jwt_decode from "jwt-decode";
 import { useTheme } from '../components/ThemeContext';
 
+const base_url = process.env.REACT_APP_BASE_URL;
+
 export function EnrolledCourses() {
     const [enrolledCourses, setEnrolledCourses] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -17,7 +19,7 @@ export function EnrolledCourses() {
                 const decodedUser = jwt_decode.jwtDecode(token); 
                 const userId = decodedUser?._id || decodedUser?.userId;  
                 console.log('Decoded User ID:', userId);
-                const response = await axios.get(`http://localhost:5001/enrolledcourses`, {
+                const response = await axios.get(`${base_url}/enrolledcourses`, {
                     headers: {
                         Authorization: `Bearer ${token}`, 
                     },

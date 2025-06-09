@@ -5,6 +5,7 @@ import { BiUpload } from "react-icons/bi";
 import { useTheme } from "../components/ThemeContext";
 import Swal from "sweetalert2";
 
+
 export function CreateCourse() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");

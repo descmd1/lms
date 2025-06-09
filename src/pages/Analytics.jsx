@@ -5,6 +5,8 @@ import axios from 'axios';
 import * as jwt_decode from 'jwt-decode';
 import { useTheme } from '../components/ThemeContext';
 
+const base_url = 'https://lms-xfl6.vercel.app'
+
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 export const Analytics = () => {

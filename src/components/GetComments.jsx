@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const base_url = process.env.REACT_APP_BASE_URL;
+
 export function GetComments({ courseId }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`http://localhost:5001/comment/${courseId}`);
+        const response = await axios.get(`${base_url}/comment/${courseId}`);
         setComments(response.data.comments);
       } catch (error) {
         console.error("Error fetching comments:", error);

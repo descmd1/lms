@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import * as jwt_decode from "jwt-decode";
 
+const base_url = process.env.REACT_APP_BASE_URL;
+
 export function Comments({ courseId }) {
   const [text, setText] = useState("");
 
@@ -13,7 +15,7 @@ export function Comments({ courseId }) {
                  const decodedUser = jwt_decode.jwtDecode(token);  
                  const userId = decodedUser?._id || decodedUser?.userId;  
                  console.log('Decoded User ID:', userId);
-                 const response = await axios.post(`http://localhost:5001/comment`, { courseId, text }, {
+                 const response = await axios.post(`${base_url}/comment`, { courseId, text }, {
                      headers: {
                          Authorization: `Bearer ${token}`, 
                      },
