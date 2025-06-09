@@ -17,15 +17,13 @@ export function Home(){
         loadAllPosts()
     }, [])
     return(
-        <div className={`app-container ${theme} flex justify-between items-center w-full dark:bg-gray-800 dark:text-white`}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 
-        lg:grid-cols-3 w-full items-center">
-            {courses.map((course) =>{
-                return(
-                    <CourseCard course={course}/>  
-                )
-            })}
-        </div>
-        </div>
+       <div className={`app-container ${theme} w-full`}>
+  <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full p-3">
+    {courses.map((course, index) => (
+      <CourseCard key={index} course={course} />
+    ))}
+  </div>
+</div>
+
     )
 }

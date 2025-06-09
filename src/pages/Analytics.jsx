@@ -26,15 +26,13 @@ const {theme} = useTheme()
 
         try {
           const response = await axios.get(`http://localhost:5001/analytics/visits/${tutorId}`);
-          
-          // Assuming response.data contains all necessary fields
           if (response.data) {
             setAnalytics({
               visits: response.data.visitCount || 0,
-              courseCount: response.data.courseCount || 0, // Change as per your response structure
-              paidEnrollments: response.data.paidEnrollments || 0, // Adjust as needed
-              ongoing: response.data.ongoing || 0, // Adjust as needed
-              completed: response.data.completed || 0, // Adjust as needed
+              courseCount: response.data.courseCount || 0,
+              paidEnrollments: response.data.paidEnrollments || 0, 
+              ongoing: response.data.ongoing || 0, 
+              completed: response.data.completed || 0, 
             });
           }
           console.log(response);
@@ -74,7 +72,7 @@ const {theme} = useTheme()
   return (
      
       <div className={`app-container ${theme} flex flex-col w-full justify-center 
-      shadow-md rounded-md bg-white p-4 dark:bg-gray-800 min-h-screen`}>
+      shadow-md rounded-md p-4 min-h-screen`}>
         <Line data={data} options={options} />
       </div>
   );

@@ -14,8 +14,8 @@ export function EnrolledCourses() {
         const token = sessionStorage.getItem("user");
         if (token) {
             try {
-                const decodedUser = jwt_decode.jwtDecode(token);  // Decode the token to get user info
-                const userId = decodedUser?._id || decodedUser?.userId;  // Assuming the token has an "id" or "userId" field
+                const decodedUser = jwt_decode.jwtDecode(token); 
+                const userId = decodedUser?._id || decodedUser?.userId;  
                 console.log('Decoded User ID:', userId);
                 const response = await axios.get(`http://localhost:5001/enrolledcourses`, {
                     headers: {
@@ -47,7 +47,7 @@ export function EnrolledCourses() {
     );
 
     return (
-        <div className={`app-container ${theme} flex flex-wrap gap-4 dark:bg-gray-800`}>
+        <div className={`app-container ${theme} flex flex-wrap gap-4`}>
             {enrolledCourses.length > 0 ? (
                 enrolledCourses.map(course => (
                     <CourseCard key={course.id} course={course} isEnrolled={true} />

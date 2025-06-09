@@ -1,13 +1,14 @@
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { useTheme } from '../components/ThemeContext';
 
 export function VerifyPayment() {
-    const { courseId } = useParams();  // Get courseId from URL params
+    const { courseId } = useParams(); 
     const navigate = useNavigate();
-    const location = useLocation();  // Get location to access query parameters
+    const location = useLocation();  
 
-    // Helper function to extract query parameters
+        const {theme} = useTheme();
     const getQueryParams = (search) => {
         return new URLSearchParams(search);
     };
@@ -24,7 +25,7 @@ export function VerifyPayment() {
                 console.log('Payment verification response:', response.data);
 
                 if (response.data.message === 'Payment verified and user enrolled') {
-                    navigate('/enrolled'); // Redirect to enrolled courses page
+                    navigate('/enrolled'); 
                 }
             } catch (error) {
                 console.error('Error verifying payment:', error);
@@ -35,7 +36,7 @@ export function VerifyPayment() {
     }, [courseId, location.search, navigate]);
 
     return (
-        <div>
+        <div className={`app-container ${theme}`}>
             <h1>Verifying Payment...</h1>
         </div>
     );

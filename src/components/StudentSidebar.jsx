@@ -5,8 +5,8 @@ import { useTheme } from "./ThemeContext";
 export function StudentSidebar() {
   const {theme} = useTheme()
     return (
-      <div className={` app-container ${theme} flex flex-col items-center justify-start bg-white p-3 gap-4 
-      shadow-md rounded-md md:visible invisible md:w-[220px] min-h-screen dark:bg-black dark:shadow-2xl`}>
+      <div className={` app-container ${theme} flex flex-col items-center justify-start p-3 gap-4 
+      shadow-md rounded-md md:visible invisible md:w-[220px] min-h-screen`}>
     {studentCourseData.map((page, index) => {
       return (
         <Link

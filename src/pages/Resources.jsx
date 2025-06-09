@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import * as jwt_decode from "jwt-decode";
 import { useTheme } from '../components/ThemeContext';
+import swal from 'sweetalert2';
 
 export const Resources = () => {
   const [title, setTitle] = useState('');
@@ -19,13 +20,22 @@ export const Resources = () => {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('pdf', file);
-    formData.append('tutorId', decodedUser._id); // Replace with actual tutorId
+    formData.append('tutorId', decodedUser._id); 
 
     try {
       const response = await axios.post('http://localhost:5001/resources', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
-      console.log('File uploaded successfully:', response.data);
+      if (response.status === 200){
+         swal.fire({
+                title: 'Good job!',
+                text: 'Rescource posted successfully!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+                });  
+      }else{
+        console.log('File uploaded successfully:', response.data);
+      }
     } catch (error) {
       console.error('Error uploading file:', error);
     }
@@ -44,12 +54,12 @@ export const Resources = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
-          className={`app-container ${theme} py-2 px-3 mb-4 rounded-sm border dark:bg-gray-800 dark:text-white`}
+          className={`field-color ${theme} py-2 px-3 mb-4 rounded-sm bg-transparent outline-none dark:text-white`}
         />
         <input type="file" accept=".pdf" onChange={handleFileChange} required />
-        <button type="submit" className='flex bg-blue-400 items-center justify-center 
-        py-2 px-3 hover:bg-purple-300 text-md font-light text-white
-        rounded-md'
+        <button type="submit" className={` button-color ${theme} flex bg-blue-400 items-center justify-center 
+        py-2 px-3 hover:bg-gray-500 transition-colors duration-700 text-md font-light text-white
+        rounded-md`}
         >Upload</button>
       </form>
     </div>

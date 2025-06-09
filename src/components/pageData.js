@@ -1,8 +1,9 @@
-import { BsPeople } from "react-icons/bs";
+import { BsBookFill, BsBookshelf, BsPeople } from "react-icons/bs";
 import { CgMail } from "react-icons/cg";
 import { CiSettings } from "react-icons/ci"
 import { FaBook, FaHome, FaUser, FaWaveSquare } from "react-icons/fa"
-import { PiBookOpenTextLight } from "react-icons/pi";
+import { FaFolder, FaFolderClosed } from "react-icons/fa6";
+import { PiBookOpenTextLight, PiBooks, PiStudentLight } from "react-icons/pi";
 
 
 export const pageData = [
@@ -52,7 +53,7 @@ export const dashboardData = [
 export const managecourseData = [
     {
         name: "Manage Course",
-        path: null, // No direct path, as it's a parent
+        path: null, 
         icon: <FaBook size={24} />,
         subItems: [
             {
@@ -81,12 +82,12 @@ export const studentCourseData = [
             {
                 name: "Courses",
                 path: "/home",
-                icon: <PiBookOpenTextLight size={24}/>
+                icon: <BsBookshelf size={24}/>
             },
             {
                 name: "Enrolled Courses",
                 path: "/enrolled",
-                icon: <PiBookOpenTextLight size={24}/>
+                icon: <PiStudentLight size={24}/>
             },
             {
                 name: "Ongoing Courses",
@@ -94,14 +95,14 @@ export const studentCourseData = [
                 icon: <PiBookOpenTextLight size={24}/>
             },
             {
-                name: "Finished Courses",
+                name: "Completed Courses",
                 path: "/completed-courses",
-                icon: <PiBookOpenTextLight size={24}/>
+                icon: <BsBookFill size={24}/>
             },
             {
                 name: "Resources",
                 path: "/view-resources",
-                icon: <PiBookOpenTextLight size={24}/>
+                icon: <FaFolderClosed size={24}/>
             }, 
             {
                 name: "Settings",

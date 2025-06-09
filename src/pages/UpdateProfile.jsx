@@ -4,6 +4,7 @@ import axios from "axios";
 import * as jwt_decode from "jwt-decode";
 import { getCourses } from "../api";
 import { FaUser } from "react-icons/fa6";
+import { useTheme } from "../components/ThemeContext";
 
 export const UpdateProfile = () => {
   const [courses, setCourses] = useState([]);
@@ -15,7 +16,7 @@ export const UpdateProfile = () => {
     role: "",
     profileImage: null,
   });
-
+const {theme} = useTheme();
   useEffect(() => {
     const fetchUserData = async () => {
       const token = sessionStorage.getItem("user");
@@ -37,7 +38,7 @@ export const UpdateProfile = () => {
             name: userData.name,
             email: userData.email,
             role: userData.role,
-            profileImage: null, // Leave this null for the new image upload
+            profileImage: null, 
           });
         } catch (error) {
           console.error("Failed to fetch user data", error);
@@ -51,14 +52,14 @@ export const UpdateProfile = () => {
   const handleFileInputChange = (event, setFieldValue) => {
     const file = event.target.files[0];
     setFieldValue("profileImage", file);
-    previewFile(file); // Call previewFile function to set preview image
+    previewFile(file); 
   };
 
   const previewFile = (file) => {
     const reader = new FileReader();
-    reader.readAsDataURL(file); // Convert image to base64 string
+    reader.readAsDataURL(file); 
     reader.onloadend = () => {
-      setPreviewSource(reader.result); // Set the previewSource state
+      setPreviewSource(reader.result); 
     };
   };
 
@@ -69,7 +70,7 @@ export const UpdateProfile = () => {
     formData.append("role", values.role);
 
     if (values.profileImage) {
-      formData.append("profileImage", values.profileImage); // Append image if uploaded
+      formData.append("profileImage", values.profileImage); 
     }
 
     const token = sessionStorage.getItem("user");
@@ -96,8 +97,8 @@ export const UpdateProfile = () => {
   };
 
   return (
-    <div className="container mx-auto shadow-md bg-white p-4 rounded-md">
-      <h1 className="flex text-2xltext-md font-bold mb-4 items-center justify-center w-full">Update Profile</h1>
+    <div className={`app-container ${theme} container mx-auto shadow-md p-4 rounded-md`}>
+      <h1 className="flex text-2xl text-md font-bold mb-4 items-center justify-center w-full">Update Profile</h1>
       <Formik
         initialValues={initialValues}
         enableReinitialize={true}
@@ -115,7 +116,7 @@ export const UpdateProfile = () => {
       className="mt-4 h-32 w-32 rounded-full object-cover border"
     />
   ) : (
-    <div className="mt-4 h-32 w-32 rounded-full border-2 border-gray-300 flex items-center justify-center">
+    <div className={`field-color ${theme} mt-4 h-32 w-32 rounded-full border-2 flex items-center justify-center`}>
       <span className="text-gray-500 text-sm"><FaUser size={62}/></span>
     </div>
   )}
@@ -133,21 +134,21 @@ export const UpdateProfile = () => {
             </div>
 
             <div className="flex flex-col">
-               <label htmlFor="name" className="text-gray-500 text-sm font-semibold">Name</label>
+               <label htmlFor="name" className="text-sm font-semibold">Name</label>
                <Field
                  name="name"
-                 className="border p-2 rounded-md text-gray-700 text-sm font-normal"
+                 className={`field-color ${theme} border p-2 rounded-md text-sm font-normal bg-transparent`}
                  placeholder="Enter your name"
                />
              </div>
 
              <div className="flex flex-col">
-               <label htmlFor="email" className="text-gray-500 text-sm font-semibold">Email</label>
+               <label htmlFor="email" className="text-sm font-semibold">Email</label>
                <Field
                  name="email"
                  type="email"
-                 className="border p-2 rounded-md text-gray-700 text-sm font-normal"
-                 value={initialValues?.email} // Use value instead of placeholder
+                 className={`field-color ${theme} border p-2 rounded-md text-sm font-normal bg-transparent`}
+                 value={initialValues?.email} 
                  disabled 
                />
              </div>
@@ -156,14 +157,15 @@ export const UpdateProfile = () => {
                <label htmlFor="role" className="text-gray-500 text-sm font-semibold">Role</label>
                <Field
                  name="role"
-                 className="border p-2 rounded-md text-gray-700 text-sm font-normal"
-                 value={initialValues?.role} // Use value instead of placeholder
+                 className={`field-color ${theme} border p-2 rounded-md text-sm font-normal bg-transparent`}
+                 value={initialValues?.role} 
                  disabled 
               />
              </div>
             <button
               type="submit"
-              className="bg-blue-500 text-white py-2 px-4 rounded-md font-normal text-sm"
+              className={`button-color card-hover ${theme} bg-blue-500 text-white py-2 px-4 rounded-md font-normal text-sm
+              transition-colors duration-700`}
             >
               Update Profile
             </button>

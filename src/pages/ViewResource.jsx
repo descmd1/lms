@@ -24,7 +24,7 @@ export const ViewResource = () => {
   const viewResourceDetails = async (id) => {
     try {
       const res = await axios.get(`http://localhost:5001/resources/${id}`);
-      setSelectedResource(res.data);  // Store selected resource data
+      setSelectedResource(res.data); 
 
       // Create a base64 data URL for opening in new tab
       const pdfUrl = `data:${res.data.pdfMimeType};base64,${res.data.pdfBase64}`;
@@ -37,7 +37,7 @@ export const ViewResource = () => {
 
   return (
     <div className={`app-container ${theme} flex flex-col w-full items-start
-    shadow-md bg-white p-4 rounded-md gap-4 min-h-screen dark:bg-gray-800`}>
+    shadow-md p-4 rounded-md gap-4 min-h-screen`}>
       <h2 className='text-bold'>View Uploaded Resources</h2>
       <ul className='flex flex-col items-start justify-center shadow-md gap-4'>
         {/* Render list of resource links */}

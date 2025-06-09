@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Confetti from 'react-confetti'; // Make sure to install react-confetti using `npm install react-confetti`
+import Confetti from 'react-confetti'; 
 import { CourseCard } from '../components/CourseCard';
+import { useTheme } from '../components/ThemeContext';
 
 export function CompletedCourses({ user }) {
     const [completedCourses, setCompletedCourses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showConfetti, setShowConfetti] = useState(false);
+    const {theme} = useTheme();
 
     useEffect(() => {
         const fetchCompletedCourses = async () => {
@@ -22,7 +24,6 @@ export function CompletedCourses({ user }) {
                 setCompletedCourses(response.data);
 
                 if (response.data.length > 0) {
-                    // Show confetti for 5 seconds after loading
                     setShowConfetti(true);
                     setTimeout(() => setShowConfetti(false), 5000);
                 }
@@ -41,7 +42,7 @@ export function CompletedCourses({ user }) {
     if (error) return <p>{error}</p>;
 
     return (
-        <div className="relative">
+        <div className={` app-container ${theme} relative`}>
             {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
             <div className="grid grid-cols-4 gap-4">
                 {completedCourses.length > 0 ? (

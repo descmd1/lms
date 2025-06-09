@@ -18,7 +18,6 @@ import { VerifyPayment } from './pages/VerifyPayment';
 import { CompletedCourses } from './pages/CompletedCourses';
 import { OngoingCourses } from './pages/OngoingCourses';
 import { Analytics } from './pages/Analytics';
-// import { Navbar } from './components/Navbar';
 
 
 function App() {
@@ -28,6 +27,7 @@ function App() {
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
   }     
  }, [])
+
   return (
       <Routes>
         <Route path='/' element={<Landingpage/>}/>
@@ -55,3 +55,5 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
 }
 
 export default App;
+
+

@@ -9,7 +9,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f4f2ee;
+  /* background-color: #f4f2ee; */
+  width: 100%;
 }
 
 code {
@@ -28,11 +29,43 @@ code {
 
 /* global.css */
 .app-container.light {
-  background-color: #f4f4f4;
+  background-color: #fff;
   color: #000000;
 }
 
 .app-container.dark {
-  background-color: #000000;
+  background-color: #222;
   color: #f7fafc;
+}
+.layout-container.dark{
+  background-color: #000;
+  color: #f7fafc
+}
+.layout-container.light {
+  background-color: #f4f4f4;
+  color: #000000;
+}
+.card-hover.light:hover{
+ background-color: rgb(238, 238, 238); 
+}
+.card-hover.dark:hover{
+ background-color:#474849;
+}
+.button-color.dark{
+background: #2c3034;
+}
+.text-color.dark{
+  color: #fff;
+}
+.fade-color.dark{
+  color: #d1d5db;
+}
+.fade-gray-color.dark{
+  color: #9ca3af;
+}
+.field-color.light{
+  border: 0.6px solid #9ca3af;
+}
+.field-color.dark{
+  border: 0.6px solid #474849;
 }

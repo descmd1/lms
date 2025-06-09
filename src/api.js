@@ -22,14 +22,10 @@ export async function createCourse(formData) {
     const response = await axios.post(`${URL}/course`, formData)
     return response
 }
-// export async function updateCourse(id, course) {
-//     const response = await axios.put(`${URL}/course/${id}`, course)
-//     return response 
-// }
 
 export async function updateCourse(id, course) {
     try {
-        const response = await axios.put(`${URL}/course/${id}`, course); // Ensure id is passed
+        const response = await axios.put(`${URL}/course/${id}`, course); 
         return response;
     } catch (error) {
         console.error("Error updating course:", error);

@@ -35,7 +35,7 @@ export function OngoingCourses({ user }) {
     if (error) return <p>{error}</p>;
 
     return (
-        <div className={`app-container ${theme} flex flex-wrap gap-4 dark:bg-gray-800`}>
+        <div className={`app-container ${theme} flex flex-wrap gap-4`}>
             {ongoingCourses.length > 0 ? (
                 ongoingCourses.map(course => (
                     <CourseCard key={course._id} course={course} user={user} isEnrolled={true}/>

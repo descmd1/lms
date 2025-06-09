@@ -236,25 +236,25 @@ export function CourseCard({ course, isEnrolled }) { // Pass isEnrolled as a pro
     };
 
     return (
-        <div className={` app-container ${theme} w-[250px] bg-white shadow-sm 
-        border p-3 hover:bg-gray-100 rounded-md mb-4 dark:bg-slate-900 dark: border-collapse`}>
+        <div className={` app-container card-hover ${theme} md:w-[226px] shadow-lg w-[180px]
+         p-3  rounded-md transition-colors duration-700`}>
             <Link to={`/coursedetails/${course?._id}`}>
-                <img src={course.image} className='w-full h-40 border' alt="course banner" />
-                <h1 className='font-bold text-blue-400'>{course?.title}</h1>
-                <p className='truncate text-gray-500'>{course?.description}</p>
+                <img src={course?.image} className='w-full h-40' alt="course banner" />
+                <h1 className={`text-color ${theme} font-bold text-blue-400`}>{course?.title}</h1>
+                <p className={`fade-color ${theme} truncate text-gray-500`}>{course?.description}</p>
 
                 {course?.chapters && course.chapters.length > 0 && (
-                    <p className='text-sm text-gray-600'>{course.chapters.length} chapters available</p>
+                    <p className={`fade-gray-color ${theme} text-sm text-gray-600`}>{course.chapters.length} chapters available</p>
                 )}
 
                 <div className='flex justify-between'>
-                    <h3 className='text-green-400'>${course.price}</h3>
-                    <p className='font-md text-sm'>{course.duration}</p>
+                    <h3 className={`text-color ${theme} text-green-400`}>${course?.price}</h3>
+                    <p className='font-md text-sm'>{course?.duration}</p>
                 </div>
             </Link>
 
             <div className='flex justify-between items-center'>
-                <h3 className='text-sm font-light'>{stringDate?.slice(4, 15)}</h3>
+                <h3 className={`fade-gray-color ${theme} text-sm font-light`}>{stringDate?.slice(4, 15)}</h3>
                 {/* Show Edit button only for tutors */}
                 {userRole === "tutor" && (
                     <Link to={`/editcourse/${course._id}`}>
@@ -273,7 +273,7 @@ export function CourseCard({ course, isEnrolled }) { // Pass isEnrolled as a pro
                 </button>
             ) : (
                 <button
-                    className='flex bg-blue-400 text-white w-full items-center justify-center mt-3 rounded-md hover:bg-purple-300 hover:text-black'
+                    className={`button-color ${theme} flex bg-blue-400 text-white w-full items-center justify-center mt-3 rounded-md hover:bg-gray-500 transition-colors duration-700 hover:text-black`}
                     onClick={handleBuyCourse}
                 >
                     Buy Course
