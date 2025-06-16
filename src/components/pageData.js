@@ -28,17 +28,17 @@ export const sidebarData = [
     {
         name: "Analytics",
         path: "/analytics",
-        icon: <FaWaveSquare size={24}/>
+        icon: <FaWaveSquare size={16}/>
     }, 
     {
         name: "Resources",
         path: "/resources",
-        icon: <PiBookOpenTextLight size={24}/>
+        icon: <PiBookOpenTextLight size={16}/>
     }, 
     {
         name: "Settings",
         path: "/settings",
-        icon: <CiSettings size={24}/>
+        icon: <CiSettings size={16}/>
     }, 
 ];
 
@@ -46,7 +46,7 @@ export const dashboardData = [
     {
         name: "Dashboard",
         path: "/home",
-        icon: <FaHome size={24}/>
+        icon: <FaHome size={16}/>
     },
 ];
 
@@ -54,12 +54,12 @@ export const managecourseData = [
     {
         name: "Manage Course",
         path: null, 
-        icon: <FaBook size={24} />,
+        icon: <FaBook size={16} />,
         subItems: [
             {
                 name: "Create Course",
                 path: "/createcourse",
-                icon: <PiBookOpenTextLight size={24}/>
+                icon: <PiBookOpenTextLight size={16}/>
             },
         ]
     }
@@ -76,38 +76,38 @@ export const studentCourseData = [
     {
         name: "Dashboard",
         path: "/home",
-        icon: <FaHome size={24}/>
+        icon: <FaHome size={16}/>
     },
     
             {
                 name: "Courses",
                 path: "/home",
-                icon: <BsBookshelf size={24}/>
+                icon: <BsBookshelf size={16}/>
             },
             {
                 name: "Enrolled Courses",
                 path: "/enrolled",
-                icon: <PiStudentLight size={24}/>
+                icon: <PiStudentLight size={16}/>
             },
             {
                 name: "Ongoing Courses",
                 path: "/ongoing-courses",
-                icon: <PiBookOpenTextLight size={24}/>
+                icon: <PiBookOpenTextLight size={16}/>
             },
             {
                 name: "Completed Courses",
                 path: "/completed-courses",
-                icon: <BsBookFill size={24}/>
+                icon: <BsBookFill size={16}/>
             },
             {
                 name: "Resources",
                 path: "/view-resources",
-                icon: <FaFolderClosed size={24}/>
+                icon: <FaFolderClosed size={16}/>
             }, 
             {
                 name: "Settings",
                 path: "/settings",
-                icon: <CiSettings size={24}/>
+                icon: <CiSettings size={16}/>
             }, 
 ];
 

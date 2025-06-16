@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { pageData, getProfileData } from './pageData';
+import { pageData, getProfileData, dashboardData, managecourseData, sidebarData, studentCourseData } from './pageData';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BiMoon, BiSearch, BiSun } from 'react-icons/bi';
 import * as jwt_decode from 'jwt-decode';
@@ -18,6 +18,11 @@ export function Navbar() {
   const params = useParams();
   let courseId = params.id;
   const { theme, toggleTheme } = useTheme();
+   const [isOpen, setIsOpen] = useState(false);
+
+    const toggleDropdowns = () => {
+        setIsOpen(!isOpen);
+    };
 
   useEffect(() => {
     async function loadUserData() {
@@ -70,7 +75,6 @@ export function Navbar() {
             {page.name}
           </Link>
         ))}
-
         {/* Bell, Profile, Dropdown */}
         <div className="relative flex items-center gap-4">
           <button onClick={handleBellClick}><FaBell /></button>
@@ -110,28 +114,86 @@ export function Navbar() {
       </div>
 
       {/* Mobile Right Drawer */}
-      <div className={`layout-container ${theme} fixed top-0 right-0 h-full w-64 shadow-lg z-50 transform transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`layout-container ${theme} fixed top-0 right-0 h-full w-64 shadow-lg  overflow-y-auto z-50 transform transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex justify-end p-4">
           <button onClick={toggleMobileMenu} className="text-2xl">&times;</button>
         </div>
         <div className="px-6 flex flex-col gap-4">
+            <div>Tutor</div>
           {pageData.map((page, index) => (
             <Link key={index} to={page.path} onClick={toggleMobileMenu} className="flex items-center gap-2 py-2 hover:text-blue-500">
               {page.icon}
               {page.name}
             </Link>
           ))}
-
+            {dashboardData.map((page, index) => (
+          <Link
+            to={page.path}
+            key={index}
+            className="hover:text-blue-500 flex items-center gap-1"
+          >
+            {page.icon}
+            {page.name}
+          </Link>
+        ))}
+         {managecourseData.map((item, index) => (
+  <div key={index} className="w-full">
+    <div 
+      onClick={toggleDropdowns} 
+      className="flex justify-between items-center p-2 shadow-sm hover:bg-gray-100 hover:text-blue-500 h-16  hover:animate-pulse rounded-md cursor-pointer transition-all duration-300 ease-in-out"
+    >
+      <div className="flex gap-3 items-center">
+        <span>{item.icon}</span>
+        <span className="text-sm font-semibold">{item.name}</span>
+      </div>
+    </div>
+    
+    {isOpen && item.subItems && (
+      <ul className="ml-8 mt-2 flex flex-col space-y-2">
+        {item.subItems.map((subItem, subIndex) => (
+          <li key={subIndex}>
+            <Link to={subItem.path} className="flex gap-3 items-center p-2 hover:bg-gray-100 hover:text-blue-500 rounded-md transition-all duration-300 ease-in-out">
+              <span className="text-base font-medium">{subItem.name}</span>
+              <span className="text-base font-medium">{subItem.icon}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+))}
+         {sidebarData.map((page, index) => (
+          <Link
+            to={page.path}
+            key={index}
+            className="hover:text-blue-500 flex items-center gap-1"
+          >
+            {page.icon}
+            {page.name}
+          </Link>
+        ))}
+        <hr className="my-2" />
+        <div>Students</div>
+         {studentCourseData.map((page, index) => (
+          <Link
+            to={page.path}
+            key={index}
+            className="hover:text-blue-500 flex items-center gap-1"
+          >
+            {page.icon}
+            {page.name}
+          </Link>
+        ))}
           <hr className="my-2" />
 
           {/* Profile actions */}
           <button onClick={handleBellClick} className="flex items-center gap-2"><FaBell /> Notifications</button>
           <Link to={profileData.path} onClick={toggleMobileMenu} className="py-2">View Profile</Link>
           <Link to={`/profileupdate/${user._id}`} onClick={toggleMobileMenu} className="py-2">Update Profile</Link>
-          <button onClick={handleLogout} className="text-red-500 py-2">Log Out</button>
           <button onClick={toggleTheme} className="py-2 flex items-center gap-2">
             {theme === "light" ? <BiMoon /> : <BiSun />}
           </button>
+           <button onClick={handleLogout} className="text-red-500 py-2">Log Out</button>
         </div>
       </div>
     </div>
