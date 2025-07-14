@@ -51,7 +51,7 @@ export function Navbar() {
       
       {/* Left: Logo and Search */}
       <div className="flex gap-5 items-center">
-        <img src="/logo.jpg" alt="logo" width={40} height={40} />
+        <img src="/logo.jpg" alt="logo" width={40} height={40} style={{borderRadius:'10px'}}/>
         <div className={`app-container ${theme} hidden md:flex gap-1 items-center bg-blue-50 p-2 rounded-xl dark:bg-gray-800`}>
           <BiSearch size={16} />
           <input
@@ -114,88 +114,91 @@ export function Navbar() {
       </div>
 
       {/* Mobile Right Drawer */}
-      <div className={`layout-container ${theme} fixed top-0 right-0 h-full w-64 shadow-lg  overflow-y-auto z-50 transform transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex justify-end p-4">
-          <button onClick={toggleMobileMenu} className="text-2xl">&times;</button>
-        </div>
-        <div className="px-6 flex flex-col gap-4">
-            <div>Tutor</div>
-          {pageData.map((page, index) => (
-            <Link key={index} to={page.path} onClick={toggleMobileMenu} className="flex items-center gap-2 py-2 hover:text-blue-500">
-              {page.icon}
-              {page.name}
-            </Link>
-          ))}
-            {dashboardData.map((page, index) => (
-          <Link
-            to={page.path}
-            key={index}
-            className="hover:text-blue-500 flex items-center gap-1"
-          >
-            {page.icon}
-            {page.name}
-          </Link>
-        ))}
-         {managecourseData.map((item, index) => (
-  <div key={index} className="w-full">
-    <div 
-      onClick={toggleDropdowns} 
-      className="flex justify-between items-center p-2 shadow-sm hover:bg-gray-100 hover:text-blue-500 h-16  hover:animate-pulse rounded-md cursor-pointer transition-all duration-300 ease-in-out"
-    >
-      <div className="flex gap-3 items-center">
-        <span>{item.icon}</span>
-        <span className="text-sm font-semibold">{item.name}</span>
-      </div>
-    </div>
-    
-    {isOpen && item.subItems && (
-      <ul className="ml-8 mt-2 flex flex-col space-y-2">
-        {item.subItems.map((subItem, subIndex) => (
-          <li key={subIndex}>
-            <Link to={subItem.path} className="flex gap-3 items-center p-2 hover:bg-gray-100 hover:text-blue-500 rounded-md transition-all duration-300 ease-in-out">
-              <span className="text-base font-medium">{subItem.name}</span>
-              <span className="text-base font-medium">{subItem.icon}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    )}
+<div className={`layout-container ${theme} fixed top-0 right-0 h-full w-64 shadow-lg overflow-y-auto z-50 transform transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+  <div className="flex justify-end p-4">
+    <button onClick={toggleMobileMenu} className="text-2xl">&times;</button>
   </div>
-))}
-         {sidebarData.map((page, index) => (
-          <Link
-            to={page.path}
-            key={index}
-            className="hover:text-blue-500 flex items-center gap-1"
-          >
-            {page.icon}
-            {page.name}
-          </Link>
-        ))}
-        <hr className="my-2" />
-        <div>Students</div>
-         {studentCourseData.map((page, index) => (
-          <Link
-            to={page.path}
-            key={index}
-            className="hover:text-blue-500 flex items-center gap-1"
-          >
-            {page.icon}
-            {page.name}
-          </Link>
-        ))}
-          <hr className="my-2" />
 
-          {/* Profile actions */}
-          <button onClick={handleBellClick} className="flex items-center gap-2"><FaBell /> Notifications</button>
-          <Link to={profileData.path} onClick={toggleMobileMenu} className="py-2">View Profile</Link>
-          <Link to={`/profileupdate/${user._id}`} onClick={toggleMobileMenu} className="py-2">Update Profile</Link>
-          <button onClick={toggleTheme} className="py-2 flex items-center gap-2">
-            {theme === "light" ? <BiMoon /> : <BiSun />}
-          </button>
-           <button onClick={handleLogout} className="text-red-500 py-2">Log Out</button>
-        </div>
-      </div>
+  <div className="px-6 flex flex-col gap-4">
+    {user?.role === "tutor" && (
+      <>
+        <div className="font-semibold text-lg">Tutor</div>
+        
+        {pageData.map((page, index) => (
+          <Link key={index} to={page.path} onClick={toggleMobileMenu} className="flex items-center gap-2 py-2 hover:text-blue-500">
+            {page.icon}
+            {page.name}
+          </Link>
+        ))}
+
+        {dashboardData.map((page, index) => (
+          <Link key={index} to={page.path} onClick={toggleMobileMenu} className="hover:text-blue-500 flex items-center gap-1">
+            {page.icon}
+            {page.name}
+          </Link>
+        ))}
+
+        {managecourseData.map((item, index) => (
+          <div key={index} className="w-full">
+            <div 
+              onClick={toggleDropdowns} 
+              className="flex justify-between items-center p-2 shadow-sm hover:bg-gray-100 hover:text-blue-500 h-16 hover:animate-pulse rounded-md cursor-pointer transition-all duration-300 ease-in-out"
+            >
+              <div className="flex gap-3 items-center">
+                <span>{item.icon}</span>
+                <span className="text-sm font-semibold">{item.name}</span>
+              </div>
+            </div>
+
+            {isOpen && item.subItems && (
+              <ul className="ml-8 mt-2 flex flex-col space-y-2">
+                {item.subItems.map((subItem, subIndex) => (
+                  <li key={subIndex}>
+                    <Link to={subItem.path} className="flex gap-3 items-center p-2 hover:bg-gray-100 hover:text-blue-500 rounded-md transition-all duration-300 ease-in-out">
+                      <span className="text-base font-medium">{subItem.name}</span>
+                      <span className="text-base font-medium">{subItem.icon}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+
+        {sidebarData.map((page, index) => (
+          <Link key={index} to={page.path} onClick={toggleMobileMenu} className="hover:text-blue-500 flex items-center gap-1">
+            {page.icon}
+            {page.name}
+          </Link>
+        ))}
+      </>
+    )}
+
+    {user?.role === "student" && (
+      <>
+        <div className="font-semibold text-lg">Student</div>
+        {studentCourseData.map((page, index) => (
+          <Link key={index} to={page.path} onClick={toggleMobileMenu} className="hover:text-blue-500 flex items-center gap-1">
+            {page.icon}
+            {page.name}
+          </Link>
+        ))}
+      </>
+    )}
+
+    <hr className="my-2" />
+
+    {/* Profile Actions */}
+    <button onClick={handleBellClick} className="flex items-center gap-2"><FaBell /> Notifications</button>
+    <Link to={profileData.path} onClick={toggleMobileMenu} className="py-2">View Profile</Link>
+    <Link to={`/profileupdate/${user._id}`} onClick={toggleMobileMenu} className="py-2">Update Profile</Link>
+    <button onClick={toggleTheme} className="py-2 flex items-center gap-2">
+      {theme === "light" ? <BiMoon /> : <BiSun />}
+    </button>
+    <button onClick={handleLogout} className="text-red-500 py-2">Log Out</button>
+  </div>
+</div>
+
     </div>
   );
 }
