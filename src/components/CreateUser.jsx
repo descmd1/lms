@@ -35,10 +35,11 @@ export function CreateUser({ setView, view }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col py-3 px-4 rounded-md shadow-sm bg-white md:w-4/12 md:p-4 w-full"
+      className="flex flex-col py-4 px-4 sm:py-6 sm:px-6 rounded-lg shadow-lg bg-white w-full max-w-sm sm:max-w-md md:max-w-lg mx-auto"
     >
+      <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6 text-center">Create Account</h2>
       <input
-        className="py-2 px-3 mb-4 rounded-sm border"
+        className="py-3 px-4 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm sm:text-base transition-all duration-200"
         name="name"
         placeholder="Enter your name"
         onChange={handleChange}
@@ -46,7 +47,7 @@ export function CreateUser({ setView, view }) {
         required
       />
       <input
-        className="py-2 px-3 mb-4 rounded-sm border"
+        className="py-3 px-4 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm sm:text-base transition-all duration-200"
         name="email"
         placeholder="e.g example@email.com"
         onChange={handleChange}
@@ -55,9 +56,9 @@ export function CreateUser({ setView, view }) {
       />
       <div className="relative">
         <input
-          className="py-2 px-3 mb-4 rounded-sm border w-full"
+          className="py-3 px-4 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent w-full text-sm sm:text-base transition-all duration-200"
           name="password"
-          type={showPassword ? "text" : "password"} // Toggle between text and password
+          type={showPassword ? "text" : "password"}
           placeholder="Password"
           onChange={handleChange}
           maxLength={20}
@@ -65,14 +66,14 @@ export function CreateUser({ setView, view }) {
         />
         <button
           type="button"
-          onClick={() => setShowPassword(!showPassword)} // Toggle visibility
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+          onClick={() => setShowPassword(!showPassword)}
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors duration-200"
         >
-          {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+          {showPassword ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
         </button>
       </div>
       <select
-        className="py-2 px-3 mb-4 rounded-sm border"
+        className="py-3 px-4 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm sm:text-base transition-all duration-200 bg-white"
         name="role"
         value={user.role}
         onChange={handleChange}
@@ -82,7 +83,7 @@ export function CreateUser({ setView, view }) {
         <option value="tutor">Tutor</option>
       </select>
       <button
-        className="py-2 px-3 mb-4 rounded-sm bg-blue-400 text-white"
+        className="py-3 px-4 mb-4 rounded-md bg-blue-500 text-white font-medium hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition-all duration-200 text-sm sm:text-base"
         type="submit"
       >
         Create account

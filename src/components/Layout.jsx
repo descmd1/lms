@@ -24,10 +24,10 @@ export function Layout() {
     return (
         <Fragment>
             <div className={`layout-container ${theme}`}> 
-                <div className="flex w-full shadow-sm h-16 md:fixed top-0 fixed">
+                <div className="flex w-full shadow-sm h-16 md:fixed top-0 fixed z-50">
                     <Navbar />
                 </div>
-                <div className="flex flex-col md:flex-row w-full py-5 px-5 md:px-[50px] lg:px-[150px] gap-5 mt-16">
+                <div className="flex flex-col md:flex-row w-full py-2 sm:py-4 md:py-5 px-2 sm:px-4 md:px-[50px] lg:px-[150px] gap-2 sm:gap-4 md:gap-5 mt-16">
                     {role === "tutor" && (
                         <div className="hidden md:block fixed">
                             <Sidebar />
@@ -39,7 +39,7 @@ export function Layout() {
                         </div>
                     )}
                     <div 
-                        className="flex-1 w-full h-screen overflow-y-auto scroll-smooth focus:scroll-auto scrollbar-hidden md:ml-[250px]"
+                        className="flex-1 w-full min-h-screen overflow-y-auto scroll-smooth focus:scroll-auto scrollbar-hidden md:ml-[250px]"
                     >
                         <Outlet /> 
                     </div>

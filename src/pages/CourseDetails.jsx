@@ -5,12 +5,16 @@ import { FaPencil } from "react-icons/fa6";
 import { Comments } from "../components/Comments";
 import * as jwt_decode from "jwt-decode";
 import { AllComments } from "../components/AllComments";
+import { LiveSessionList } from "../components/LiveSessionList";
+import { ScheduleLiveSession } from "../components/ScheduleLiveSession";
 import { useTheme } from "../components/ThemeContext";
 
 
 export function CourseDetails() {
   const [course, setCourse] = useState({});
   const [role, setRole] = useState(""); 
+  const [showScheduleForm, setShowScheduleForm] = useState(false);
+  const [refreshSessions, setRefreshSessions] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
   let id = params.id;
@@ -90,6 +94,39 @@ export function CourseDetails() {
             </ul>
           </div>
         )}
+
+        {/* Live Sessions Section */}
+        <div className="w-full mt-6">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className={`text-xl font-semibold`}>Live Sessions</h2>
+            {role === "tutor" && (
+              <button
+                onClick={() => setShowScheduleForm(!showScheduleForm)}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors text-sm"
+              >
+                {showScheduleForm ? 'Cancel' : 'Schedule Live Session'}
+              </button>
+            )}
+          </div>
+
+          {showScheduleForm && role === "tutor" && (
+            <div className="mb-6">
+              <ScheduleLiveSession 
+                courseId={course._id}
+                onSessionScheduled={() => {
+                  setShowScheduleForm(false);
+                  setRefreshSessions(!refreshSessions);
+                }}
+              />
+            </div>
+          )}
+
+          <LiveSessionList 
+            courseId={course._id} 
+            isRefresh={refreshSessions}
+          />
+        </div>
+
         <Comments courseId={course._id} />
         <AllComments courseId={course._id}/>
       </div>

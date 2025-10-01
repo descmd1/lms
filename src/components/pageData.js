@@ -1,7 +1,7 @@
 import { BsBookFill, BsBookshelf, BsPeople } from "react-icons/bs";
 import { CgMail } from "react-icons/cg";
 import { CiSettings } from "react-icons/ci"
-import { FaBook, FaHome, FaUser, FaWaveSquare } from "react-icons/fa"
+import { FaBook, FaHome, FaUser, FaWaveSquare, FaVideo } from "react-icons/fa"
 import { FaFolder, FaFolderClosed } from "react-icons/fa6";
 import { PiBookOpenTextLight, PiBooks, PiStudentLight } from "react-icons/pi";
 
@@ -60,6 +60,11 @@ export const managecourseData = [
                 name: "Create Course",
                 path: "/createcourse",
                 icon: <PiBookOpenTextLight size={16}/>
+            },
+            {
+                name: "Live Sessions",
+                path: "/live-sessions",
+                icon: <FaVideo size={16}/>
             },
         ]
     }

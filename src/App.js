@@ -18,6 +18,9 @@ import { VerifyPayment } from './pages/VerifyPayment';
 import { CompletedCourses } from './pages/CompletedCourses';
 import { OngoingCourses } from './pages/OngoingCourses';
 import { Analytics } from './pages/Analytics';
+import { LiveRoom } from './pages/LiveRoom';
+import { LiveSessionDashboard } from './pages/LiveSessionDashboard';
+import { Settings } from './pages/Settings';
 
 
 function App() {
@@ -49,7 +52,11 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
           <Route path='/completed-courses' element={<CompletedCourses/>}/>
           <Route path='/ongoing-courses' element={<OngoingCourses/>}/>
           <Route path='/analytics' element={<Analytics/>}/>
+          <Route path='/live-sessions' element={<LiveSessionDashboard/>}/>
+          <Route path='/settings' element={<Settings/>}/>
         </Route>
+        {/* Live room should be outside Layout as it needs full screen */}
+        <Route path='/live-room/:sessionId' element={<LiveRoom/>}/>
       </Routes>
   );
 }

@@ -47,37 +47,39 @@ export function Navbar() {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <div className={`app-container ${theme} flex justify-between items-center px-4 w-full md:px-[150px] relative dark:text-white dark:shadow-md`}>
+    <div className={`app-container ${theme} flex justify-between items-center px-2 sm:px-4 md:px-6 lg:px-[150px] w-full relative dark:text-white dark:shadow-md`}>
       
       {/* Left: Logo and Search */}
-      <div className="flex gap-5 items-center">
-        <img src="/logo.jpg" alt="logo" width={40} height={40} style={{borderRadius:'10px'}}/>
-        <div className={`app-container ${theme} hidden md:flex gap-1 items-center bg-blue-50 p-2 rounded-xl dark:bg-gray-800`}>
-          <BiSearch size={16} />
+      <div className="flex gap-2 sm:gap-4 md:gap-5 items-center">
+        <img src="/logo.jpg" alt="logo" width={32} height={32} className="sm:w-10 sm:h-10 rounded-lg"/>
+        <div className={`app-container ${theme} hidden md:flex gap-1 items-center bg-blue-50 p-2 rounded-xl dark:bg-gray-800 min-w-0 flex-1 max-w-xs`}>
+          <BiSearch size={16} className="flex-shrink-0" />
           <input
             name="search"
             placeholder="Search by title...."
             type="text"
-            className="outline-none bg-transparent"
+            className="outline-none bg-transparent w-full min-w-0 text-sm"
           />
         </div>
       </div>
 
       {/* Desktop Navigation */}
-      <div className="hidden md:flex gap-6 items-center">
+      <div className="hidden md:flex gap-3 lg:gap-6 items-center">
         {pageData.map((page, index) => (
           <Link
             to={page.path}
             key={index}
-            className="hover:text-blue-500 flex items-center gap-1"
+            className="hover:text-blue-500 flex items-center gap-1 text-sm lg:text-base transition-colors duration-200"
           >
-            {page.icon}
-            {page.name}
+            <span className="flex-shrink-0">{page.icon}</span>
+            <span className="hidden lg:inline">{page.name}</span>
           </Link>
         ))}
         {/* Bell, Profile, Dropdown */}
-        <div className="relative flex items-center gap-4">
-          <button onClick={handleBellClick}><FaBell /></button>
+        <div className="relative flex items-center gap-2 lg:gap-4">
+          <button onClick={handleBellClick} className="p-1 hover:bg-gray-100 rounded-full transition-colors duration-200">
+            <FaBell size={16} />
+          </button>
           {isModalOpen && (
             <div className="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
               <div className="modal-content bg-white p-5 rounded-lg w-80 relative">

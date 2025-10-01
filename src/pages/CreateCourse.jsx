@@ -3,6 +3,7 @@ import { createCourse } from "../api";
 import { useNavigate } from "react-router-dom";
 import { BiUpload } from "react-icons/bi";
 import { useTheme } from "../components/ThemeContext";
+import { ScheduleLiveSession } from "../components/ScheduleLiveSession";
 import Swal from "sweetalert2";
 
 
@@ -17,11 +18,27 @@ export function CreateCourse() {
     const [chapters, setChapters] = useState([
         { title: "", content: "", video: null },
     ]);
+    const [includesLiveSessions, setIncludesLiveSessions] = useState(false);
+    const [courseId, setCourseId] = useState(null);
+    const [showLiveSessionForm, setShowLiveSessionForm] = useState(false);
     const navigate = useNavigate();
     const { theme } = useTheme();
 
     const handleImageChange = (e) => {
-        setImage(e.target.files[0]);
+        const file = e.target.files[0];
+        if (file) {
+            // Check file size (max 10MB for images)
+            if (file.size > 10 * 1024 * 1024) {
+                Swal.fire({
+                    title: 'File Too Large',
+                    text: 'Please select an image smaller than 10MB',
+                    icon: 'warning'
+                });
+                e.target.value = '';
+                return;
+            }
+        }
+        setImage(file);
     };
 
     const handleChapterChange = (index, field, value) => {
@@ -32,8 +49,21 @@ export function CreateCourse() {
 
     // Handle chapter video changes
     const handleChapterVideoChange = (index, e) => {
+        const file = e.target.files[0];
+        if (file) {
+            // Check file size (max 100MB for videos)
+            if (file.size > 100 * 1024 * 1024) {
+                Swal.fire({
+                    title: 'File Too Large',
+                    text: 'Please select a video smaller than 100MB',
+                    icon: 'warning'
+                });
+                e.target.value = '';
+                return;
+            }
+        }
         const updatedChapters = [...chapters];
-        updatedChapters[index].video = e.target.files[0];
+        updatedChapters[index].video = file;
         setChapters(updatedChapters);
     };
 
@@ -46,10 +76,26 @@ export function CreateCourse() {
         setChapters(updatedChapters);
     };
 
+    const [isUploading, setIsUploading] = useState(false);
+    const [uploadProgress, setUploadProgress] = useState(0);
+
     async function handleSubmit(e) {
         e.preventDefault();
+        setIsUploading(true);
+        setUploadProgress(0);
 
-        const formData = new FormData();
+        try {
+            // Show initial loading message
+            Swal.fire({
+                title: 'Uploading Course...',
+                text: 'Please wait while we upload your files. This may take a few minutes.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            const formData = new FormData();
         formData.append("image", image);
         chapters.forEach((chapter, index) => {
             formData.append(`chapters[${index}][title]`, chapter.title);
@@ -75,19 +121,64 @@ export function CreateCourse() {
         });
 
         const response = await createCourse(formData);
+        
+        Swal.close(); // Close the loading dialog
+        setIsUploading(false);
 
         if (response.status === 200) {
-            Swal.fire({
-                title: "Good job!",
-                text: "Course created successfully!",
-                icon: "success",
-                confirmButtonText: "OK",
-            });
-            navigate("/home");
+            setCourseId(response.data.insertedId);
+            
+            if (includesLiveSessions) {
+                Swal.fire({
+                    title: "Course Created!",
+                    text: "Course created successfully! Now you can schedule live sessions.",
+                    icon: "success",
+                    confirmButtonText: "Schedule Live Sessions",
+                    showCancelButton: true,
+                    cancelButtonText: "Skip for Now"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        setShowLiveSessionForm(true);
+                    } else {
+                        navigate("/home");
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: "Good job!",
+                    text: "Course created successfully!",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                });
+                navigate("/home");
+            }
         } else {
             Swal.fire({
                 title: "Failed!",
                 text: "Course creation failed!",
+                icon: "error",
+                confirmButtonText: "OK",
+            });
+        }
+        } catch (error) {
+            console.error('Course creation error:', error);
+            setIsUploading(false);
+            Swal.close();
+            
+            let errorMessage = 'Course creation failed!';
+            if (error.response?.status === 408) {
+                errorMessage = 'Upload timeout! Please try with smaller files or check your internet connection.';
+            } else if (error.response?.status === 413) {
+                errorMessage = 'Files are too large! Please upload smaller files (max 500MB total).';
+            } else if (error.message.includes('timeout')) {
+                errorMessage = 'Upload timeout! Please try again with smaller files.';
+            } else if (error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            }
+            
+            Swal.fire({
+                title: "Upload Failed!",
+                text: errorMessage,
                 icon: "error",
                 confirmButtonText: "OK",
             });
@@ -162,6 +253,20 @@ export function CreateCourse() {
                             Business
                         </option>
                     </select>
+                </div>
+
+                {/* Live Sessions Option */}
+                <div className="flex items-center gap-2 mb-4">
+                    <input
+                        type="checkbox"
+                        id="includesLiveSessions"
+                        checked={includesLiveSessions}
+                        onChange={(e) => setIncludesLiveSessions(e.target.checked)}
+                        className="w-4 h-4 text-blue-600 rounded"
+                    />
+                    <label htmlFor="includesLiveSessions" className="text-gray-400 font-normal">
+                        This course will include live video sessions
+                    </label>
                 </div>
 
                 {/* Chapters section */}
@@ -281,11 +386,62 @@ export function CreateCourse() {
                 {/* Submit Button */}
                 <button
                     type="submit"
-                    className={`button-color ${theme} bg-blue-500 text-white hover:bg-gray-500 transition-colors duration-700 py-2 rounded-md mt-2`}
+                    disabled={isUploading}
+                    className={`button-color ${theme} bg-blue-500 text-white hover:bg-gray-500 transition-colors duration-700 py-3 rounded-md mt-2 relative ${
+                        isUploading ? 'opacity-75 cursor-not-allowed' : ''
+                    }`}
                 >
-                    Create Course
+                    {isUploading ? (
+                        <div className="flex items-center justify-center gap-2">
+                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                            <span>Uploading... Please wait</span>
+                        </div>
+                    ) : (
+                        'Create Course'
+                    )}
                 </button>
+                
+                {/* Upload Progress Indicator */}
+                {isUploading && (
+                    <div className="mt-4 p-4 bg-blue-50 rounded-md">
+                        <p className="text-blue-800 text-sm mb-2">
+                            📤 Uploading your course files to cloud storage...
+                        </p>
+                        <div className="text-xs text-blue-600">
+                            <p>• Large files may take several minutes to upload</p>
+                            <p>• Please keep this page open during upload</p>
+                            <p>• Ensure stable internet connection</p>
+                        </div>
+                    </div>
+                )}
             </form>
+
+            {/* Live Session Scheduling Form */}
+            {showLiveSessionForm && courseId && (
+                <div className="mt-8">
+                    <ScheduleLiveSession 
+                        courseId={courseId}
+                        onSessionScheduled={() => {
+                            Swal.fire({
+                                title: "Success!",
+                                text: "Live session scheduled successfully!",
+                                icon: "success",
+                                confirmButtonText: "OK"
+                            }).then(() => {
+                                navigate("/home");
+                            });
+                        }}
+                    />
+                    <div className="mt-4 text-center">
+                        <button
+                            onClick={() => navigate("/home")}
+                            className={`fade-color ${theme} underline hover:text-blue-500 transition-colors`}
+                        >
+                            Skip and go to home
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
