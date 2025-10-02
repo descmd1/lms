@@ -186,10 +186,10 @@ export function CreateCourse() {
     }
 
     return (
-        <div className={`app-container ${theme} min-h-screen px-4 sm:px-6 lg:px-8 py-6`}>
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 px-4 sm:px-6 lg:px-8 py-6">
             <div className="max-w-4xl mx-auto">
                 <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 lg:p-8`}>
-                    <h1 className={`text-color ${theme} text-2xl sm:text-3xl font-bold mb-6 text-center`}>
+                    <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-900 dark:text-white">
                         Create New Course
                     </h1>
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -204,7 +204,7 @@ export function CreateCourse() {
                                     maxLength={100}
                                     onChange={(e) => setTitle(e.target.value)}
                                     required
-                                    className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200`}
+                                    className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                                 />
                             </div>
                             
@@ -218,7 +218,7 @@ export function CreateCourse() {
                                     maxLength={300}
                                     onChange={(e) => setDescription(e.target.value)}
                                     required
-                                    className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200`}
+                                    className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                                 />
                             </div>
                             
@@ -233,7 +233,7 @@ export function CreateCourse() {
                                     rows={6}
                                     onChange={(e) => setContent(e.target.value)}
                                     required
-                                    className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none`}
+                                    className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
                                 />
                             </div>
                         </div>
@@ -248,33 +248,33 @@ export function CreateCourse() {
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
                                 required
-                                className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200`}
+                                className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                             >
-                        <option value="Science" className={`layout-container ${theme}`}>
+                        <option value="Science">
                             Science
                         </option>
-                        <option value="Art" className={`layout-container ${theme}`}>
+                        <option value="Art">
                             Art
                         </option>
-                        <option value="Management Science" className={`layout-container ${theme}`}>
+                        <option value="Management Science">
                             Management Science
                         </option>
-                        <option value="Law" className={`layout-container ${theme}`}>
+                        <option value="Law">
                             Law
                         </option>
-                        <option value="Engineering" className={`layout-container ${theme}`}>
+                        <option value="Engineering">
                             Engineering
                         </option>
-                        <option value="Agriculture" className={`layout-container ${theme}`}>
+                        <option value="Agriculture">
                             Agriculture
                         </option>
-                        <option value="IT" className={`layout-container ${theme}`}>
+                        <option value="IT">
                             IT
                         </option>
-                        <option value="Craftmanship" className={`layout-container ${theme}`}>
+                        <option value="Craftmanship">
                             Craftmanship
                         </option>
-                        <option value="Entrepreneurship" className={`layout-container ${theme}`}>
+                        <option value="Entrepreneurship">
                             Entrepreneurship
                         </option>
                     </select>
@@ -315,7 +315,7 @@ export function CreateCourse() {
                                                 e.target.value
                                             )
                                         }
-                                        className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-800 outline-none border border-gray-300 dark:border-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200`}
+                                        className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                                     />
                                     <textarea
                                         name={`chapter-content-${index}`}
@@ -329,7 +329,7 @@ export function CreateCourse() {
                                                 e.target.value
                                             )
                                         }
-                                        className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-800 outline-none border border-gray-300 dark:border-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none`}
+                                        className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
                                     />
                                     <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 text-center hover:border-blue-400 transition-colors">
                                         <div className="flex flex-col items-center gap-2">
@@ -420,7 +420,7 @@ export function CreateCourse() {
                                     placeholder="Enter price (USD)"
                                     onChange={(e) => setPrice(e.target.value)}
                                     required
-                                    className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200`}
+                                    className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                                 />
                             </div>
                             <div>
@@ -432,7 +432,7 @@ export function CreateCourse() {
                                     placeholder="e.g., 8 weeks, 3 months"
                                     onChange={(e) => setDuration(e.target.value)}
                                     required
-                                    className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200`}
+                                    className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                                 />
                             </div>
                         </div>
