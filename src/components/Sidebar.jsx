@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom"
-import { sidebarData, managecourseData, dashboardData, pageData } from "./pageData"
+import { sidebarData, managecourseData, dashboardData } from "./pageData"
 import { useTheme } from "./ThemeContext";
 
 export function Sidebar() {
@@ -16,6 +16,7 @@ export function Sidebar() {
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
+    
     return (
         <div className={`app-container ${theme} flex flex-col justify-start bg-white/95 dark:bg-gray-900/95 backdrop-blur-md p-4 gap-3 shadow-2xl rounded-2xl md:visible invisible md:w-[240px] min-h-screen border border-gray-200/20 dark:border-gray-700/20`}>
         
@@ -32,56 +33,31 @@ export function Sidebar() {
           </div>
         </div>
 
-        {/* Navigation Pages */}
-        <div className="mb-4">
-          <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">Navigation</h4>
-          <div className="space-y-1">
-            {pageData.map((page, index) => {
-              const isActive = location.pathname === page.path;
-              return (
-                <Link
-                  to={page.path}
-                  key={index}
-                  className={`group relative flex p-3 w-full rounded-xl transition-all duration-300 ${
-                    isActive 
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg transform scale-105' 
-                      : 'hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-gray-800 dark:hover:to-gray-700 hover:shadow-md hover:transform hover:scale-102'
-                  }`}
-                >
-                  <div className="flex gap-3 items-center w-full">
-                    <span className={`text-lg ${isActive ? 'text-white' : 'text-blue-500 group-hover:scale-110'} transition-all duration-200`}>{page.icon}</span>
-                    <span className={`text-sm font-semibold flex-1 ${isActive ? 'text-white' : 'text-gray-900 dark:text-gray-200'}`}>{page.name}</span>
-                    {isActive && <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>}
-                  </div>
-                  {!isActive && <div className="absolute left-0 top-0 w-0 h-full bg-gradient-to-b from-blue-500 to-purple-500 rounded-l-xl group-hover:w-1 transition-all duration-300"></div>}
-                </Link>
-              );
-            })}
-          </div>
-        </div>
+        {/* Dashboard Section */}
+        {dashboardData.map((page, index) => {
+          const isActive = location.pathname === page.path;
+          return (
+            <Link
+              to={page.path}
+              key={index}
+              className={`group relative flex p-4 w-full rounded-xl transition-all duration-300 ${
+                isActive 
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg transform scale-105' 
+                  : 'hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-gray-800 dark:hover:to-gray-700 hover:shadow-md hover:transform hover:scale-102'
+              }`}
+            >
+              <div className="flex gap-3 items-center w-full">
+                <span className={`text-lg ${isActive ? 'text-white' : 'text-blue-500 group-hover:scale-110'} transition-all duration-200`}>{page.icon}</span>
+                <span className={`text-sm font-semibold flex-1 ${isActive ? 'text-white' : 'text-gray-900 dark:text-gray-200'}`}>{page.name}</span>
+                {isActive && <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>}
+              </div>
+              {!isActive && <div className="absolute left-0 top-0 w-0 h-full bg-gradient-to-b from-blue-500 to-purple-500 rounded-l-xl group-hover:w-1 transition-all duration-300"></div>}
+            </Link>
+          );
+        })}
 
-{dashboardData.map((page, index) => {
-      const isActive = location.pathname === page.path;
-      return (
-        <Link
-          to={page.path}
-          key={index}
-          className={`group relative flex p-4 w-full rounded-xl transition-all duration-300 ${
-            isActive 
-              ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg transform scale-105' 
-              : 'hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-gray-800 dark:hover:to-gray-700 hover:shadow-md hover:transform hover:scale-102'
-          }`}
-        >
-        <div className="flex gap-3 items-center w-full">
-            <span className={`text-lg ${isActive ? 'text-white' : 'text-blue-500 group-hover:scale-110'} transition-all duration-200`}>{page.icon}</span>
-            <span className={`text-sm font-semibold flex-1 ${isActive ? 'text-white' : 'text-gray-900 dark:text-gray-200'}`}>{page.name}</span>
-            {isActive && <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>}
-          </div>
-          {!isActive && <div className="absolute left-0 top-0 w-0 h-full bg-gradient-to-b from-blue-500 to-purple-500 rounded-l-xl group-hover:w-1 transition-all duration-300"></div>}
-        </Link>
-      );
-    })}
- {managecourseData.map((item, index) => {
+        {/* Course Management Section */}
+        {managecourseData.map((item, index) => {
     // Check if any sub-item is active
     const hasActiveSubItem = item.subItems && item.subItems.some(subItem => location.pathname === subItem.path);
     
@@ -128,31 +104,32 @@ export function Sidebar() {
         })}
       </ul>
     )}
-  </div>
-    );
-  })}
-
-    {sidebarData.map((page, index) => {
-      const isActive = location.pathname === page.path;
-      return (
-        <Link
-          to={page.path}
-          key={index}
-          className={`group relative flex p-4 w-full rounded-xl transition-all duration-300 ${
-            isActive 
-              ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg transform scale-105' 
-              : 'hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-gray-800 dark:hover:to-gray-700 hover:shadow-md hover:transform hover:scale-102'
-          }`}
-        >
-        <div className="flex gap-3 items-center w-full">
-            <span className={`text-lg ${isActive ? 'text-white' : 'text-blue-500 group-hover:scale-110'} transition-all duration-200`}>{page.icon}</span>
-            <span className={`text-sm font-semibold flex-1 ${isActive ? 'text-white' : 'text-gray-900 dark:text-gray-200'}`}>{page.name}</span>
-            {isActive && <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>}
           </div>
-          {!isActive && <div className="absolute left-0 top-0 w-0 h-full bg-gradient-to-b from-blue-500 to-purple-500 rounded-l-xl group-hover:w-1 transition-all duration-300"></div>}
-        </Link>
-      );
-    })}
-  </div>
-    )
+        );
+      })}
+
+      {/* Tools Section */}
+      {sidebarData.map((page, index) => {
+        const isActive = location.pathname === page.path;
+        return (
+          <Link
+            to={page.path}
+            key={index}
+            className={`group relative flex p-4 w-full rounded-xl transition-all duration-300 ${
+              isActive 
+                ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg transform scale-105' 
+                : 'hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-gray-800 dark:hover:to-gray-700 hover:shadow-md hover:transform hover:scale-102'
+            }`}
+          >
+            <div className="flex gap-3 items-center w-full">
+              <span className={`text-lg ${isActive ? 'text-white' : 'text-blue-500 group-hover:scale-110'} transition-all duration-200`}>{page.icon}</span>
+              <span className={`text-sm font-semibold flex-1 ${isActive ? 'text-white' : 'text-gray-900 dark:text-gray-200'}`}>{page.name}</span>
+              {isActive && <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>}
+            </div>
+            {!isActive && <div className="absolute left-0 top-0 w-0 h-full bg-gradient-to-b from-blue-500 to-purple-500 rounded-l-xl group-hover:w-1 transition-all duration-300"></div>}
+          </Link>
+        );
+      })}
+    </div>
+  );
 }
