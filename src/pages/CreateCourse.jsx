@@ -16,11 +16,12 @@ export function CreateCourse() {
     const [image, setImage] = useState(null);
     const [category, setCategory] = useState("Science");
     const [chapters, setChapters] = useState([
-        { title: "", content: "", video: null },
+        { title: "", content: "", video: null, videoName: "" },
     ]);
     const [includesLiveSessions, setIncludesLiveSessions] = useState(false);
     const [courseId, setCourseId] = useState(null);
     const [showLiveSessionForm, setShowLiveSessionForm] = useState(false);
+    const [selectedImageName, setSelectedImageName] = useState('');
     const navigate = useNavigate();
     const { theme } = useTheme();
 
@@ -35,8 +36,12 @@ export function CreateCourse() {
                     icon: 'warning'
                 });
                 e.target.value = '';
+                setSelectedImageName('');
                 return;
             }
+            setSelectedImageName(file.name);
+        } else {
+            setSelectedImageName('');
         }
         setImage(file);
     };
@@ -64,11 +69,12 @@ export function CreateCourse() {
         }
         const updatedChapters = [...chapters];
         updatedChapters[index].video = file;
+        updatedChapters[index].videoName = file ? file.name : '';
         setChapters(updatedChapters);
     };
 
     const addChapter = () => {
-        setChapters([...chapters, { title: "", content: "", video: null }]);
+        setChapters([...chapters, { title: "", content: "", video: null, videoName: "" }]);
     };
 
     const removeChapter = (index) => {
@@ -81,6 +87,46 @@ export function CreateCourse() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        
+        // Validate required fields
+        if (!title.trim() || !description.trim() || !content.trim() || !price || !duration.trim()) {
+            Swal.fire({
+                title: 'Missing Information',
+                text: 'Please fill in all required fields.',
+                icon: 'warning'
+            });
+            return;
+        }
+        
+        if (!image) {
+            Swal.fire({
+                title: 'Missing Course Image',
+                text: 'Please upload a course image.',
+                icon: 'warning'
+            });
+            return;
+        }
+        
+        // Validate chapters
+        for (let i = 0; i < chapters.length; i++) {
+            if (!chapters[i].title.trim() || !chapters[i].content.trim()) {
+                Swal.fire({
+                    title: 'Missing Chapter Information',
+                    text: `Please fill in title and content for Chapter ${i + 1}.`,
+                    icon: 'warning'
+                });
+                return;
+            }
+            if (!chapters[i].video) {
+                Swal.fire({
+                    title: 'Missing Chapter Video',
+                    text: `Please upload a video for Chapter ${i + 1}.`,
+                    icon: 'warning'
+                });
+                return;
+            }
+        }
+        
         setIsUploading(true);
         setUploadProgress(0);
 
@@ -96,12 +142,8 @@ export function CreateCourse() {
             });
 
             const formData = new FormData();
-        formData.append("image", image);
-        chapters.forEach((chapter, index) => {
-            formData.append(`chapters[${index}][title]`, chapter.title);
-            formData.append(`chapters[${index}][content]`, chapter.content);
-            formData.append(`chapters[${index}][video]`, chapter.video);
-        });
+        
+        // Append basic course information
         formData.append("title", title);
         formData.append("description", description);
         formData.append("content", content);
@@ -110,7 +152,12 @@ export function CreateCourse() {
         formData.append("category", category);
         formData.append("published", false);
         formData.append("dateCreated", new Date().toISOString());
-
+        
+        // Append course image
+        if (image) {
+            formData.append("image", image);
+        }
+        
         // Append chapters and their videos
         chapters.forEach((chapter, index) => {
             formData.append(`chapters[${index}][title]`, chapter.title);
@@ -125,17 +172,22 @@ export function CreateCourse() {
         Swal.close(); // Close the loading dialog
         setIsUploading(false);
 
-        if (response.status === 200) {
-            setCourseId(response.data.insertedId);
+        console.log('Course creation response:', response);
+
+        // Check for successful response (status 200 or 201)
+        if (response.status === 200 || response.status === 201) {
+            const courseId = response.data.insertedId || response.data.courseId || response.data._id;
+            setCourseId(courseId);
             
             if (includesLiveSessions) {
-                Swal.fire({
-                    title: "Course Created!",
-                    text: "Course created successfully! Now you can schedule live sessions.",
+                await Swal.fire({
+                    title: "Course Created Successfully!",
+                    text: "Your course has been created! Now you can schedule live sessions.",
                     icon: "success",
                     confirmButtonText: "Schedule Live Sessions",
                     showCancelButton: true,
-                    cancelButtonText: "Skip for Now"
+                    cancelButtonText: "Skip for Now",
+                    allowOutsideClick: false
                 }).then((result) => {
                     if (result.isConfirmed) {
                         setShowLiveSessionForm(true);
@@ -144,21 +196,18 @@ export function CreateCourse() {
                     }
                 });
             } else {
-                Swal.fire({
-                    title: "Good job!",
-                    text: "Course created successfully!",
+                await Swal.fire({
+                    title: "Course Created Successfully!",
+                    text: "Your course has been uploaded and is ready for students!",
                     icon: "success",
-                    confirmButtonText: "OK",
+                    confirmButtonText: "Go to Home",
+                    allowOutsideClick: false
                 });
                 navigate("/home");
             }
         } else {
-            Swal.fire({
-                title: "Failed!",
-                text: "Course creation failed!",
-                icon: "error",
-                confirmButtonText: "OK",
-            });
+            // Handle unexpected response
+            throw new Error(`Unexpected response status: ${response.status}`);
         }
         } catch (error) {
             console.error('Course creation error:', error);
@@ -332,16 +381,21 @@ export function CreateCourse() {
                                         }
                                         className="w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
                                     />
-                                    <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 text-center hover:border-blue-400 transition-colors">
+                                    <div className={`border-2 border-dashed ${chapter.videoName ? 'border-green-400 bg-green-50 dark:bg-green-900/10' : 'border-gray-300 dark:border-gray-600'} rounded-lg p-4 text-center hover:border-blue-400 transition-colors`}>
                                         <div className="flex flex-col items-center gap-2">
-                                            <BiUpload className="text-2xl text-blue-500" />
+                                            <BiUpload className={`text-2xl ${chapter.videoName ? 'text-green-500' : 'text-blue-500'}`} />
                                             <label
                                                 htmlFor={`chapter-video-${index}`}
                                                 className="text-blue-600 dark:text-blue-400 font-medium cursor-pointer hover:text-blue-700 transition-colors"
                                             >
-                                                Upload Video for Chapter {index + 1}
+                                                {chapter.videoName ? `Selected: ${chapter.videoName}` : `Upload Video for Chapter ${index + 1}`}
                                             </label>
                                             <p className="text-xs">Max size: 100MB</p>
+                                            {chapter.videoName && (
+                                                <p className="text-xs text-green-600 dark:text-green-400">
+                                                    ✓ Video selected successfully
+                                                </p>
+                                            )}
                                         </div>
                                         <input
                                             type="file"
@@ -393,9 +447,14 @@ export function CreateCourse() {
                                             htmlFor="image"
                                             className="text-blue-600 dark:text-blue-400 font-medium cursor-pointer hover:text-blue-700 transition-colors"
                                         >
-                                            Upload Course Image
+                                            {selectedImageName ? `Selected: ${selectedImageName}` : 'Upload Course Image'}
                                         </label>
                                         <p className="text-xs mt-1">PNG, JPG up to 10MB</p>
+                                        {selectedImageName && (
+                                            <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+                                                ✓ Image selected successfully
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
                                 <input
