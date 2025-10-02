@@ -215,7 +215,7 @@ export function Navbar() {
                       key={index} 
                       to={page.path} 
                       onClick={toggleMobileMenu} 
-                      className="flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-gray-800 dark:hover:to-gray-700 transition-all duration-200 group"
+                      className="flex items-center gap-3 p-3 text-gray-700 dark:text-gray-200 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-gray-800 dark:hover:to-gray-700 transition-all duration-200 group"
                     >
                       <span className="text-blue-500 group-hover:scale-110 transition-transform duration-200">{page.icon}</span>
                       <span className="font-medium">{page.name}</span>

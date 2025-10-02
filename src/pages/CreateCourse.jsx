@@ -186,16 +186,17 @@ export function CreateCourse() {
     }
 
     return (
-        <div className="min-h-screen bg-white dark:bg-gray-900 px-4 sm:px-6 lg:px-8 py-6">
+        <div className={`app-container ${theme} min-h-screen rounded-lg px-4 sm:px-6 lg:px-8 py-6`}>
             <div className="max-w-4xl mx-auto">
-                <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 lg:p-8`}>
-                    <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-900 dark:text-white">
+                <div className={`rounded-lg shadow-lg p-4 sm:p-6 lg:p-8`}>
+                    <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center">
                         Create New Course
                     </h1>
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <label className="block text-sm font-medium 
+                                 mb-2">
                                     Course Title *
                                 </label>
                                 <input
@@ -204,12 +205,12 @@ export function CreateCourse() {
                                     maxLength={100}
                                     onChange={(e) => setTitle(e.target.value)}
                                     required
-                                    className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                    className="w-full py-3 px-4 bg-transparent rounded-lg outline-none border focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                                 />
                             </div>
                             
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <label className="block text-sm font-medium mb-2">
                                     Course Description *
                                 </label>
                                 <input
@@ -218,12 +219,12 @@ export function CreateCourse() {
                                     maxLength={300}
                                     onChange={(e) => setDescription(e.target.value)}
                                     required
-                                    className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                    className="w-full py-3 px-4 bg-transparent rounded-lg outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                                 />
                             </div>
                             
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <label className="block text-sm font-medium mb-2">
                                     Course Content *
                                 </label>
                                 <textarea
@@ -233,14 +234,14 @@ export function CreateCourse() {
                                     rows={6}
                                     onChange={(e) => setContent(e.target.value)}
                                     required
-                                    className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                                    className="w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
                                 />
                             </div>
                         </div>
 
                         {/* Category selection */}
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <label className="block text-sm font-medium  mb-2">
                                 Course Category *
                             </label>
                             <select
@@ -248,7 +249,7 @@ export function CreateCourse() {
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
                                 required
-                                className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                className="w-full py-3 px-4 bg-transparent rounded-lg outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                             >
                         <option value="Science">
                             Science
@@ -281,7 +282,7 @@ export function CreateCourse() {
                 </div>
 
                         {/* Live Sessions Option */}
-                        <div className="flex items-center gap-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                        <div className="flex items-center gap-3 p-4 rounded-lg">
                             <input
                                 type="checkbox"
                                 id="includesLiveSessions"
@@ -289,19 +290,19 @@ export function CreateCourse() {
                                 onChange={(e) => setIncludesLiveSessions(e.target.checked)}
                                 className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
                             />
-                            <label htmlFor="includesLiveSessions" className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer">
+                            <label htmlFor="includesLiveSessions" className="text-sm font-medium cursor-pointer">
                                 This course will include live video sessions
                             </label>
                         </div>
 
                         {/* Chapters section */}
                         <div className="space-y-4">
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <label className="block text-sm font-medium">
                                 Course Chapters *
                             </label>
                             {chapters.map((chapter, index) => (
-                                <div key={index} className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg space-y-4 border border-gray-200 dark:border-gray-600">
-                                    <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
+                                <div key={index} className="p-4 rounded-lg space-y-4 border border-gray-200 dark:border-gray-300">
+                                    <h4 className="text-lg font-semibold mb-3">
                                         Chapter {index + 1}
                                     </h4>
                                     <input
@@ -315,7 +316,7 @@ export function CreateCourse() {
                                                 e.target.value
                                             )
                                         }
-                                        className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                        className="w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                                     />
                                     <textarea
                                         name={`chapter-content-${index}`}
@@ -329,7 +330,7 @@ export function CreateCourse() {
                                                 e.target.value
                                             )
                                         }
-                                        className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                                        className="w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
                                     />
                                     <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 text-center hover:border-blue-400 transition-colors">
                                         <div className="flex flex-col items-center gap-2">
@@ -340,7 +341,7 @@ export function CreateCourse() {
                                             >
                                                 Upload Video for Chapter {index + 1}
                                             </label>
-                                            <p className="text-xs text-gray-500 dark:text-gray-400">Max size: 100MB</p>
+                                            <p className="text-xs">Max size: 100MB</p>
                                         </div>
                                         <input
                                             type="file"
@@ -381,7 +382,7 @@ export function CreateCourse() {
                         </div>
                         {/* Image Upload */}
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <label className="block text-sm font-medium mb-2">
                                 Course Image *
                             </label>
                             <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
@@ -394,7 +395,7 @@ export function CreateCourse() {
                                         >
                                             Upload Course Image
                                         </label>
-                                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">PNG, JPG up to 10MB</p>
+                                        <p className="text-xs mt-1">PNG, JPG up to 10MB</p>
                                     </div>
                                 </div>
                                 <input
@@ -411,7 +412,7 @@ export function CreateCourse() {
                         {/* Price and Duration */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <label className="block text-sm font-medium mb-2">
                                     Course Price *
                                 </label>
                                 <input
@@ -420,11 +421,11 @@ export function CreateCourse() {
                                     placeholder="Enter price (USD)"
                                     onChange={(e) => setPrice(e.target.value)}
                                     required
-                                    className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                    className="w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <label className="block text-sm font-medium mb-2">
                                     Course Duration *
                                 </label>
                                 <input
@@ -432,7 +433,7 @@ export function CreateCourse() {
                                     placeholder="e.g., 8 weeks, 3 months"
                                     onChange={(e) => setDuration(e.target.value)}
                                     required
-                                    className="w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                    className="w-full py-3 px-4 bg-transparent rounded-lg outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                                 />
                             </div>
                         </div>
@@ -473,7 +474,7 @@ export function CreateCourse() {
                 {/* Live Session Scheduling Form */}
                 {showLiveSessionForm && courseId && (
                     <div className="mt-8">
-                        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6">
+                        <div className="rounded-lg shadow-lg p-4 sm:p-6">
                             <ScheduleLiveSession 
                                 courseId={courseId}
                                 onSessionScheduled={() => {
