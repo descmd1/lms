@@ -143,10 +143,15 @@ export function EditCourse() {
                         className={`field-color ${theme} py-2 px-3 mb-4 rounded-sm border color bg-transparent`}
                     >
                         <option value="" className={`layout-container ${theme}`} >Select a category</option>
-                        <option value="programming" className={`layout-container ${theme}`}>Programming</option>
-                        <option value="design" className={`layout-container ${theme}`}>Design</option>
-                        <option value="marketing" className={`layout-container ${theme}`}>Marketing</option>
-                        <option value="business" className={`layout-container ${theme}`}>Business</option>
+                        <option value="Science" className={`layout-container ${theme}`}>Science</option>
+                        <option value="Art" className={`layout-container ${theme}`}>Art</option>
+                        <option value="Management Science" className={`layout-container ${theme}`}>Management Science</option>
+                        <option value="Law" className={`layout-container ${theme}`}>Law</option>
+                        <option value="Engineering" className={`layout-container ${theme}`}>Engineering</option>
+                        <option value="Agriculture" className={`layout-container ${theme}`}>Agriculture</option>
+                        <option value="IT" className={`layout-container ${theme}`}>IT</option>
+                        <option value="Craftmanship" className={`layout-container ${theme}`}>Craftmanship</option>
+                        <option value="Entrepreneurship" className={`layout-container ${theme}`}>Entrepreneurship</option>
                     </select>
                 </div>
 

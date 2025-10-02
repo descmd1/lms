@@ -14,7 +14,7 @@ export function CreateCourse() {
     const [price, setPrice] = useState("");
     const [duration, setDuration] = useState("");
     const [image, setImage] = useState(null);
-    const [category, setCategory] = useState("programming");
+    const [category, setCategory] = useState("Science");
     const [chapters, setChapters] = useState([
         { title: "", content: "", video: null },
     ]);
@@ -186,262 +186,319 @@ export function CreateCourse() {
     }
 
     return (
-        <div
-            className={`app-container ${theme} flex justify-center px-4 py-4 rounded-md 
-              shadow-lg`}
-        >
-            <form onSubmit={handleSubmit} className="flex flex-col w-full">
-                <input
-                    name="title"
-                    placeholder="Title"
-                    maxLength={100}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                    className={`field-color ${theme} py-2 px-3 mb-4 rounded-sm color bg-transparent outline-none`}
-                />
-                <input
-                    name="description"
-                    placeholder="Description"
-                    maxLength={300}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                    className={`field-color ${theme} py-3 px-3 mb-4 rounded-sm color bg-transparent outline-none`}
-                />
-                <textarea
-                    name="content"
-                    placeholder="Write your content"
-                    maxLength={3000}
-                    onChange={(e) => setContent(e.target.value)}
-                    required
-                    className={`field-color ${theme} py-5 px-4 mb-4 rounded-sm color bg-transparent outline-none`}
-                />
+        <div className={`app-container ${theme} min-h-screen px-4 sm:px-6 lg:px-8 py-6`}>
+            <div className="max-w-4xl mx-auto">
+                <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 lg:p-8`}>
+                    <h1 className={`text-color ${theme} text-2xl sm:text-3xl font-bold mb-6 text-center`}>
+                        Create New Course
+                    </h1>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Course Title *
+                                </label>
+                                <input
+                                    name="title"
+                                    placeholder="Enter course title"
+                                    maxLength={100}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    required
+                                    className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200`}
+                                />
+                            </div>
+                            
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Course Description *
+                                </label>
+                                <input
+                                    name="description"
+                                    placeholder="Brief description of the course"
+                                    maxLength={300}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    required
+                                    className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200`}
+                                />
+                            </div>
+                            
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Course Content *
+                                </label>
+                                <textarea
+                                    name="content"
+                                    placeholder="Detailed content description"
+                                    maxLength={3000}
+                                    rows={6}
+                                    onChange={(e) => setContent(e.target.value)}
+                                    required
+                                    className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none`}
+                                />
+                            </div>
+                        </div>
 
-                {/* Category selection */}
-                <div className="flex flex-col gap-2 w-full">
-                    <label className="text-gray-400 font-normal">
-                        Select Category
-                    </label>
-                    <select
-                        name="category"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        required
-                        className={`field-color ${theme} py-2 px-3 mb-4 rounded-sm color bg-transparent outline-none`}
-                    >
-                        <option
-                            value="programming"
-                            className={`layout-container ${theme}`}
-                        >
-                            Programming
+                        {/* Category selection */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Course Category *
+                            </label>
+                            <select
+                                name="category"
+                                value={category}
+                                onChange={(e) => setCategory(e.target.value)}
+                                required
+                                className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200`}
+                            >
+                        <option value="Science" className={`layout-container ${theme}`}>
+                            Science
                         </option>
-                        <option
-                            value="design"
-                            className={`layout-container ${theme}`}
-                        >
-                            Design
+                        <option value="Art" className={`layout-container ${theme}`}>
+                            Art
                         </option>
-                        <option
-                            value="marketing"
-                            className={`layout-container ${theme}`}
-                        >
-                            Marketing
+                        <option value="Management Science" className={`layout-container ${theme}`}>
+                            Management Science
                         </option>
-                        <option
-                            value="business"
-                            className={`layout-container ${theme}`}
-                        >
-                            Business
+                        <option value="Law" className={`layout-container ${theme}`}>
+                            Law
+                        </option>
+                        <option value="Engineering" className={`layout-container ${theme}`}>
+                            Engineering
+                        </option>
+                        <option value="Agriculture" className={`layout-container ${theme}`}>
+                            Agriculture
+                        </option>
+                        <option value="IT" className={`layout-container ${theme}`}>
+                            IT
+                        </option>
+                        <option value="Craftmanship" className={`layout-container ${theme}`}>
+                            Craftmanship
+                        </option>
+                        <option value="Entrepreneurship" className={`layout-container ${theme}`}>
+                            Entrepreneurship
                         </option>
                     </select>
                 </div>
 
-                {/* Live Sessions Option */}
-                <div className="flex items-center gap-2 mb-4">
-                    <input
-                        type="checkbox"
-                        id="includesLiveSessions"
-                        checked={includesLiveSessions}
-                        onChange={(e) => setIncludesLiveSessions(e.target.checked)}
-                        className="w-4 h-4 text-blue-600 rounded"
-                    />
-                    <label htmlFor="includesLiveSessions" className="text-gray-400 font-normal">
-                        This course will include live video sessions
-                    </label>
-                </div>
-
-                {/* Chapters section */}
-                <div className="flex flex-col gap-2 mb-4">
-                    <label className="text-gray-400 font-normal">
-                        Chapters
-                    </label>
-                    {chapters.map((chapter, index) => (
-                        <div key={index} className="flex flex-col gap-2 mb-2">
+                        {/* Live Sessions Option */}
+                        <div className="flex items-center gap-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                             <input
-                                name={`chapter-title-${index}`}
-                                placeholder={`Chapter ${index + 1} Title`}
-                                value={chapter.title}
-                                onChange={(e) =>
-                                    handleChapterChange(
-                                        index,
-                                        "title",
-                                        e.target.value
-                                    )
-                                }
-                                className={`field-color ${theme} py-2 px-3 mb-4 rounded-sm color bg-transparent outline-none`}
+                                type="checkbox"
+                                id="includesLiveSessions"
+                                checked={includesLiveSessions}
+                                onChange={(e) => setIncludesLiveSessions(e.target.checked)}
+                                className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
                             />
-                            <textarea
-                                name={`chapter-content-${index}`}
-                                placeholder={`Chapter ${index + 1} Content`}
-                                value={chapter.content}
-                                onChange={(e) =>
-                                    handleChapterChange(
-                                        index,
-                                        "content",
-                                        e.target.value
-                                    )
-                                }
-                                className={`field-color ${theme} py-2 px-3 mb-4 rounded-sm color bg-transparent outline-none`}
-                            />
-                            <div className="py-2 px-2 mb-2 rounded-sm">
-                                <button className="flex items-center justify-center text-blue-500">
-                                    <BiUpload />{" "}
-                                </button>
-                                <label
-                                    htmlFor={`chapter-video-${index}`}
-                                    className="text-blue-500 text-md font-light cursor-pointer"
+                            <label htmlFor="includesLiveSessions" className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer">
+                                This course will include live video sessions
+                            </label>
+                        </div>
+
+                        {/* Chapters section */}
+                        <div className="space-y-4">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                Course Chapters *
+                            </label>
+                            {chapters.map((chapter, index) => (
+                                <div key={index} className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg space-y-4 border border-gray-200 dark:border-gray-600">
+                                    <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
+                                        Chapter {index + 1}
+                                    </h4>
+                                    <input
+                                        name={`chapter-title-${index}`}
+                                        placeholder={`Chapter ${index + 1} Title`}
+                                        value={chapter.title}
+                                        onChange={(e) =>
+                                            handleChapterChange(
+                                                index,
+                                                "title",
+                                                e.target.value
+                                            )
+                                        }
+                                        className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-800 outline-none border border-gray-300 dark:border-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200`}
+                                    />
+                                    <textarea
+                                        name={`chapter-content-${index}`}
+                                        placeholder={`Chapter ${index + 1} Content`}
+                                        value={chapter.content}
+                                        rows={4}
+                                        onChange={(e) =>
+                                            handleChapterChange(
+                                                index,
+                                                "content",
+                                                e.target.value
+                                            )
+                                        }
+                                        className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-white dark:bg-gray-800 outline-none border border-gray-300 dark:border-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none`}
+                                    />
+                                    <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 text-center hover:border-blue-400 transition-colors">
+                                        <div className="flex flex-col items-center gap-2">
+                                            <BiUpload className="text-2xl text-blue-500" />
+                                            <label
+                                                htmlFor={`chapter-video-${index}`}
+                                                className="text-blue-600 dark:text-blue-400 font-medium cursor-pointer hover:text-blue-700 transition-colors"
+                                            >
+                                                Upload Video for Chapter {index + 1}
+                                            </label>
+                                            <p className="text-xs text-gray-500 dark:text-gray-400">Max size: 100MB</p>
+                                        </div>
+                                        <input
+                                            type="file"
+                                            id={`chapter-video-${index}`}
+                                            name={`chapter-video-${index}`}
+                                            accept="video/*"
+                                            onChange={(e) =>
+                                                handleChapterVideoChange(index, e)
+                                            }
+                                            className="hidden"
+                                            required
+                                        />
+                                    </div>
+                                    
+                                    {chapters.length > 1 && (
+                                        <div className="flex justify-end">
+                                            <button
+                                                type="button"
+                                                onClick={() => removeChapter(index)}
+                                                className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 font-medium px-4 py-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200"
+                                            >
+                                                Remove Chapter
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                            <div className="text-center">
+                                <button
+                                    type="button"
+                                    onClick={addChapter}
+                                    className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium px-4 py-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200"
                                 >
-                                    Upload Video for Chapter {index + 1}{" "}
-                                </label>
+                                    <span className="text-lg">+</span>
+                                    Add Chapter
+                                </button>
+                            </div>
+                        </div>
+                        {/* Image Upload */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Course Image *
+                            </label>
+                            <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
+                                <div className="flex flex-col items-center gap-3">
+                                    <BiUpload className="text-3xl text-blue-500" />
+                                    <div>
+                                        <label
+                                            htmlFor="image"
+                                            className="text-blue-600 dark:text-blue-400 font-medium cursor-pointer hover:text-blue-700 transition-colors"
+                                        >
+                                            Upload Course Image
+                                        </label>
+                                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">PNG, JPG up to 10MB</p>
+                                    </div>
+                                </div>
                                 <input
                                     type="file"
-                                    id={`chapter-video-${index}`}
-                                    name={`chapter-video-${index}`}
-                                    accept="video/*"
-                                    onChange={(e) =>
-                                        handleChapterVideoChange(index, e)
-                                    }
-                                    // className="hidden"
+                                    id="image"
+                                    name="image"
+                                    accept="image/*"
+                                    onChange={handleImageChange}
+                                    className="hidden"
                                     required
                                 />
                             </div>
-                            {chapters.length > 1 && (
+                        </div>
+                        {/* Price and Duration */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Course Price *
+                                </label>
+                                <input
+                                    name="price"
+                                    type="number"
+                                    placeholder="Enter price (USD)"
+                                    onChange={(e) => setPrice(e.target.value)}
+                                    required
+                                    className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200`}
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Course Duration *
+                                </label>
+                                <input
+                                    name="duration"
+                                    placeholder="e.g., 8 weeks, 3 months"
+                                    onChange={(e) => setDuration(e.target.value)}
+                                    required
+                                    className={`field-color ${theme} w-full py-3 px-4 rounded-lg bg-transparent outline-none border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200`}
+                                />
+                            </div>
+                        </div>
+                        {/* Submit Button */}
+                        <div className="pt-6 border-t border-gray-200 dark:border-gray-600">
+                            <button
+                                type="submit"
+                                disabled={isUploading}
+                                className={`w-full sm:w-auto min-w-[200px] bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2`}
+                            >
+                                {isUploading ? (
+                                    <>
+                                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                                        <span>Uploading... Please wait</span>
+                                    </>
+                                ) : (
+                                    'Create Course'
+                                )}
+                            </button>
+                        </div>
+                        
+                        {/* Upload Progress Indicator */}
+                        {isUploading && (
+                            <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                                <p className="text-blue-800 dark:text-blue-200 text-sm mb-2">
+                                    📤 Uploading your course files to cloud storage...
+                                </p>
+                                <div className="text-xs text-blue-600 dark:text-blue-300 space-y-1">
+                                    <p>• Large files may take several minutes to upload</p>
+                                    <p>• Please keep this page open during upload</p>
+                                    <p>• Ensure stable internet connection</p>
+                                </div>
+                            </div>
+                        )}
+                    </form>
+                </div>
+
+                {/* Live Session Scheduling Form */}
+                {showLiveSessionForm && courseId && (
+                    <div className="mt-8">
+                        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6">
+                            <ScheduleLiveSession 
+                                courseId={courseId}
+                                onSessionScheduled={() => {
+                                    Swal.fire({
+                                        title: "Success!",
+                                        text: "Live session scheduled successfully!",
+                                        icon: "success",
+                                        confirmButtonText: "OK"
+                                    }).then(() => {
+                                        navigate("/home");
+                                    });
+                                }}
+                            />
+                            <div className="mt-6 text-center">
                                 <button
-                                    type="button"
-                                    onClick={() => removeChapter(index)}
-                                    className="text-red-600 font-semibold"
+                                    onClick={() => navigate("/home")}
+                                    className={`text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline transition-colors`}
                                 >
-                                    Remove Chapter
+                                    Skip and go to home
                                 </button>
-                            )}
-                        </div>
-                    ))}
-                    <button
-                        type="button"
-                        onClick={addChapter}
-                        className="text-blue-600 font-semibold"
-                    >
-                        Add Chapter
-                    </button>
-                </div>
-                {/* Image Upload */}
-                <div className="py-2 px-2 mb-2 rounded-sm">
-                    <button className="flex items-center justify-center text-blue-500">
-                        <BiUpload />{" "}
-                    </button>
-                    <label
-                        htmlFor="image"
-                        className="text-blue-500 text-md font-light"
-                    >
-                        Upload Course Image{" "}
-                    </label>
-                    <input
-                        type="file"
-                        id="image"
-                        name="image"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                        // className="hidden"
-                        required
-                    />
-                </div>
-                {/* Price and Duration */}
-                <div className="flex flex-col md:flex-row gap-5 w-full">
-                    <input
-                        name="price"
-                        placeholder="Price"
-                        maxLength={300}
-                        onChange={(e) => setPrice(e.target.value)}
-                        required
-                        className={`field-color ${theme} py-2 px-3 mb-4 rounded-sm color w-full bg-transparent outline-none`}
-                    />
-                    <input
-                        name="duration"
-                        placeholder="Duration"
-                        maxLength={300}
-                        onChange={(e) => setDuration(e.target.value)}
-                        required
-                        className={`field-color ${theme} py-2 px-3 mb-4 rounded-sm color w-full bg-transparent outline-none`}
-                    />
-                </div>
-                {/* Submit Button */}
-                <button
-                    type="submit"
-                    disabled={isUploading}
-                    className={`button-color ${theme} bg-blue-500 text-white hover:bg-gray-500 transition-colors duration-700 py-3 rounded-md mt-2 relative ${
-                        isUploading ? 'opacity-75 cursor-not-allowed' : ''
-                    }`}
-                >
-                    {isUploading ? (
-                        <div className="flex items-center justify-center gap-2">
-                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                            <span>Uploading... Please wait</span>
-                        </div>
-                    ) : (
-                        'Create Course'
-                    )}
-                </button>
-                
-                {/* Upload Progress Indicator */}
-                {isUploading && (
-                    <div className="mt-4 p-4 bg-blue-50 rounded-md">
-                        <p className="text-blue-800 text-sm mb-2">
-                            📤 Uploading your course files to cloud storage...
-                        </p>
-                        <div className="text-xs text-blue-600">
-                            <p>• Large files may take several minutes to upload</p>
-                            <p>• Please keep this page open during upload</p>
-                            <p>• Ensure stable internet connection</p>
+                            </div>
                         </div>
                     </div>
                 )}
-            </form>
-
-            {/* Live Session Scheduling Form */}
-            {showLiveSessionForm && courseId && (
-                <div className="mt-8">
-                    <ScheduleLiveSession 
-                        courseId={courseId}
-                        onSessionScheduled={() => {
-                            Swal.fire({
-                                title: "Success!",
-                                text: "Live session scheduled successfully!",
-                                icon: "success",
-                                confirmButtonText: "OK"
-                            }).then(() => {
-                                navigate("/home");
-                            });
-                        }}
-                    />
-                    <div className="mt-4 text-center">
-                        <button
-                            onClick={() => navigate("/home")}
-                            className={`fade-color ${theme} underline hover:text-blue-500 transition-colors`}
-                        >
-                            Skip and go to home
-                        </button>
-                    </div>
-                </div>
-            )}
+            </div>
         </div>
     );
 }
