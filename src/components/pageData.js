@@ -84,11 +84,11 @@ export const studentCourseData = [
         icon: <FaHome size={16}/>
     },
     
-            {
-                name: "Courses",
-                path: "/home",
-                icon: <BsBookshelf size={16}/>
-            },
+            // {
+            //     name: "Courses",
+            //     path: "/home",
+            //     icon: <BsBookshelf size={16}/>
+            // },
             {
                 name: "Enrolled Courses",
                 path: "/enrolled",
