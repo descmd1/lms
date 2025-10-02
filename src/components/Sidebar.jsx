@@ -48,7 +48,7 @@ export function Sidebar() {
             >
               <div className="flex gap-3 items-center w-full">
                 <span className={`text-lg ${isActive ? 'text-white' : 'text-blue-500 group-hover:scale-110'} transition-all duration-200`}>{page.icon}</span>
-                <span className={`text-sm font-semibold flex-1 ${isActive ? 'text-white' : 'text-gray-900 dark:text-gray-200'}`}>{page.name}</span>
+                <span className={`text-sm font-semibold flex-1 ${isActive ? 'text-white' : 'text-black dark:text-gray-200'}`}>{page.name}</span>
                 {isActive && <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>}
               </div>
               {!isActive && <div className="absolute left-0 top-0 w-0 h-full bg-gradient-to-b from-blue-500 to-purple-500 rounded-l-xl group-hover:w-1 transition-all duration-300"></div>}
@@ -73,7 +73,7 @@ export function Sidebar() {
     >
       <div className="flex gap-3 items-center">
         <span className={`text-lg ${hasActiveSubItem ? 'text-blue-500' : 'text-blue-500 group-hover:scale-110'} transition-all duration-200`}>{item.icon}</span>
-        <span className={`text-sm font-semibold ${hasActiveSubItem ? 'text-blue-600 dark:text-blue-400' : 'text-gray-900 dark:text-gray-200'}`}>{item.name}</span>
+        <span className={`text-sm font-semibold ${hasActiveSubItem ? 'text-blue-600 dark:text-blue-400' : 'text-black dark:text-gray-200'}`}>{item.name}</span>
       </div>
       <div className={`transform transition-transform duration-200 ${(isOpen || hasActiveSubItem) ? 'rotate-90' : ''}`}>
         <div className="w-2 h-2 border-r-2 border-b-2 border-current rotate-45"></div>
@@ -95,7 +95,7 @@ export function Sidebar() {
                 }`}
               >
                 <div className={`w-2 h-2 rounded-full ${isSubActive ? 'bg-white' : 'bg-blue-400'} group-hover:scale-125 transition-all duration-200`}></div>
-                <span className={`text-sm font-medium flex-1 ${isSubActive ? 'text-white' : 'text-gray-900 dark:text-gray-200'}`}>{subItem.name}</span>
+                <span className={`text-sm font-medium flex-1 ${isSubActive ? 'text-white' : 'text-black dark:text-gray-200'}`}>{subItem.name}</span>
                 <span className={`text-sm ${isSubActive ? 'text-white' : 'text-blue-500 group-hover:scale-110'} transition-all duration-200`}>{subItem.icon}</span>
                 {!isSubActive && <div className="absolute left-0 top-0 w-0 h-full bg-gradient-to-b from-blue-500 to-purple-500 rounded-l-lg group-hover:w-1 transition-all duration-300"></div>}
               </Link>
@@ -123,7 +123,7 @@ export function Sidebar() {
           >
             <div className="flex gap-3 items-center w-full">
               <span className={`text-lg ${isActive ? 'text-white' : 'text-blue-500 group-hover:scale-110'} transition-all duration-200`}>{page.icon}</span>
-              <span className={`text-sm font-semibold flex-1 ${isActive ? 'text-white' : 'text-gray-900 dark:text-gray-200'}`}>{page.name}</span>
+              <span className={`text-sm font-semibold flex-1 ${isActive ? 'text-white' : 'text-black dark:text-gray-200'}`}>{page.name}</span>
               {isActive && <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>}
             </div>
             {!isActive && <div className="absolute left-0 top-0 w-0 h-full bg-gradient-to-b from-blue-500 to-purple-500 rounded-l-xl group-hover:w-1 transition-all duration-300"></div>}
